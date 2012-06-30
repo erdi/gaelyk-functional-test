@@ -1,0 +1,2 @@
+include 'gaelyk-functional-test', 'test-project', 'test-project-different-endpoint'
+rootProject.name = 'gaelyk-functional-test-all'

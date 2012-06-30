@@ -1,0 +1,10 @@
+apply plugin: 'groovy'
+apply plugin: 'idea'
+
+dependencies {
+  groovy 'org.codehaus.groovy:groovy-all:1.8.6'
+}
+
+task wrapper(type: Wrapper) {
+  gradleVersion = '1.0'
+}
