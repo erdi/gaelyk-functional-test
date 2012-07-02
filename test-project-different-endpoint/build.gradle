@@ -1,0 +1,3 @@
+gaeFunctionalTest {
+	systemProperty 'gaelyk.remote.endpoint', 'custom-remote-control'
+}
