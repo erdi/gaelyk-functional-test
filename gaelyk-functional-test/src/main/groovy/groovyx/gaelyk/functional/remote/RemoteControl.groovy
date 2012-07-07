@@ -20,12 +20,18 @@ import groovyx.remote.transport.http.HttpTransport
 import geb.ConfigurationLoader
 
 class RemoteControl extends groovyx.remote.client.RemoteControl {
+	static final String ENDPOINT_PROPERTY_NAME = 'gaelyk.remote.endpoint'
+
 	RemoteControl() {
 		super(new HttpTransport(getRemoteControlServletUrl(), Thread.currentThread().contextClassLoader), Thread.currentThread().contextClassLoader)
 	}
 
-	private static getRemoteControlServletUrl() {
+	private static String getRemoteControlServletEndpoint() {
+		System.getProperty(ENDPOINT_PROPERTY_NAME) ?: 'remote-control'
+	}
+
+	private static String getRemoteControlServletUrl() {
 		def conf = new ConfigurationLoader().conf
-		"${conf.baseUrl}remote-control"
+		"${conf.baseUrl}$remoteControlServletEndpoint"
 	}
 }
