@@ -5,7 +5,7 @@ buildscript {
 	ext {
 		gaePluginVersion = '0.7.2'
 		gaelykPluginVersion = '0.3.2'
-		gaeGebPluginVersion = '0.1'
+		gaeGebPluginVersion = '0.3'
 	}
 
 	repositories {
@@ -28,6 +28,7 @@ subprojects {
 		gaeVersion = '1.6.6'
 		gaelykVersion = '1.2'
 		gebVersion = '0.7.0'
+		spockVersion = '0.6-groovy-1.8'
 
 		compatibilityVersion = 1.5
 	}
@@ -55,19 +56,16 @@ configure(subprojects.findAll {it.name.startsWith('test-project')}) {
 
 		gaeSdk "com.google.appengine:appengine-java-sdk:$gaeVersion"
 
-		testCompile 'org.spockframework:spock-core:0.6-groovy-1.8', {
+		testCompile "org.spockframework:spock-core:$spockVersion", {
 			exclude group: 'org.codehaus.groovy', module: 'groovy-all'
 		}
 	}
 
 	gae {
 		downloadSdk = true
-		optimizeWar = true
+		optimizeWar = false
 		warDir = project.file('src/main/webapp/')
 	}
-
-	gaeExplodeWar.dependsOn gaelykPrecompileGroovlet
-	gaeExplodeWar.dependsOn gaelykPrecompileTemplate
 
 	sourceSets.main.output.classesDir = 'src/main/webapp/WEB-INF/classes'
 
@@ -83,6 +81,14 @@ configure(subprojects.findAll {it.name.startsWith('test-project')}) {
 	}
 
 	gaeRun.dependsOn copyRuntimeLibraries
+
+	task createGroovletsDir << {
+		new File(webAppDir, 'WEB-INF/groovy').mkdirs()
+	}
+
+	createGroovletsDir.outputs.file(new File(webAppDir, 'WEB-INF/groovy'))
+
+	gaelykPrecompileGroovlet.dependsOn createGroovletsDir
 }
 
 task wrapper(type: Wrapper) {
