@@ -18,15 +18,13 @@ package groovyx.gaelyk.functional.spock
 
 import org.spockframework.runtime.extension.AbstractAnnotationDrivenExtension
 import org.spockframework.runtime.model.FeatureInfo
-import org.spockframework.runtime.extension.AbstractMethodInterceptor
-import org.spockframework.runtime.extension.IMethodInvocation
 import groovyx.gaelyk.functional.datastore.DatastoreCleaner
 import org.spockframework.runtime.model.SpecInfo
 import org.spockframework.runtime.model.MethodInfo
 import spock.lang.Stepwise
 
 class ModifiesDatastoreExtension extends AbstractAnnotationDrivenExtension<ModifiesDatastore> {
-	FeatureDatastoreCleaningInterceptor featureBasedInterceptor = new FeatureDatastoreCleaningInterceptor()
+	FeatureDatastoreCleaningInterceptor featureBasedInterceptor = new FeatureDatastoreCleaningInterceptor(new DatastoreCleaner())
 
 	@Override
 	void visitFeatureAnnotation(ModifiesDatastore annotation, FeatureInfo feature) {
@@ -39,36 +37,6 @@ class ModifiesDatastoreExtension extends AbstractAnnotationDrivenExtension<Modif
 	@Override
 	void visitSpecAnnotation(ModifiesDatastore annotation, SpecInfo spec) {
 		MethodInfo intercepted = spec.reflection.isAnnotationPresent(Stepwise) ? spec.cleanupSpecMethod : spec.cleanupMethod
-		intercepted.addInterceptor(new SpecDatastoreCleaningInterceptor())
-	}
-
-
-}
-
-class DatastoreCleaningInterceptor extends AbstractMethodInterceptor {
-	protected DatastoreCleaner cleaner = new DatastoreCleaner()
-}
-
-class FeatureDatastoreCleaningInterceptor extends DatastoreCleaningInterceptor {
-	@Override
-	void interceptCleanupMethod(IMethodInvocation invocation) {
-		if (invocation.feature.featureMethod.reflection.isAnnotationPresent(ModifiesDatastore)) {
-			cleaner.clean()
-		}
-		invocation.proceed()
-	}
-}
-
-class SpecDatastoreCleaningInterceptor extends DatastoreCleaningInterceptor {
-	@Override
-	void interceptCleanupMethod(IMethodInvocation invocation) {
-		cleaner.clean()
-		invocation.proceed()
-	}
-
-	@Override
-	void interceptCleanupSpecMethod(IMethodInvocation invocation) {
-		cleaner.clean()
-		invocation.proceed()
+		intercepted.addInterceptor(new SpecDatastoreCleaningInterceptor(new DatastoreCleaner()))
 	}
 }

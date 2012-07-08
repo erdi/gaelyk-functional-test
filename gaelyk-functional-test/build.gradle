@@ -5,4 +5,5 @@ dependencies {
 		exclude group: 'org.codehaus.groovy', module: 'groovy-all'
 	}
 	runtime 'org.seleniumhq.selenium:selenium-api:2.22.0'
+	testRuntime 'cglib:cglib-nodep:2.2.2'
 }
