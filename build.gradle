@@ -29,6 +29,7 @@ subprojects {
 		gaelykVersion = '1.2'
 		gebVersion = '0.7.0'
 		spockVersion = '0.6-groovy-1.8'
+		seleniumVersion = '2.22.0'
 
 		compatibilityVersion = 1.5
 	}

@@ -1,9 +1,9 @@
 dependencies {
 	compile 'org.gaelyk:gaelyk-remote:0.1',
-		"org.codehaus.geb:geb-core:$gebVersion"
+		"org.codehaus.geb:geb-spock:$gebVersion"
 	compile "org.spockframework:spock-core:$spockVersion", {
 		exclude group: 'org.codehaus.groovy', module: 'groovy-all'
 	}
-	runtime 'org.seleniumhq.selenium:selenium-api:2.22.0'
+	compile "org.seleniumhq.selenium:selenium-api:$seleniumVersion"
 	testRuntime 'cglib:cglib-nodep:2.2.2'
 }
