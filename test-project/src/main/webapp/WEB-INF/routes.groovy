@@ -15,4 +15,5 @@
  */
 
 get '/userInfo', forward: 'WEB-INF/pages/userInfo.gtpl'
+get '/anotherUserInfo', forward: 'WEB-INF/pages/anotherUserInfo.gtpl'
 

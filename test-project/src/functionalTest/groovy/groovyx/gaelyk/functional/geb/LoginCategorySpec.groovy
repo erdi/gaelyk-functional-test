@@ -18,6 +18,8 @@ package groovyx.gaelyk.functional.geb
 
 import geb.spock.GebSpec
 import groovyx.gaelyk.functional.geb.page.UserInfoPage
+import groovyx.gaelyk.functional.geb.page.AnotherUserInfoPage
+import spock.lang.Unroll
 
 @Mixin(LoginCategory)
 class LoginCategorySpec extends GebSpec {
@@ -29,14 +31,20 @@ class LoginCategorySpec extends GebSpec {
 		!loggedIn
 	}
 
-	def 'user is logged in'() {
+	@Unroll
+	def '#scenario is logged in with username "#passedUsername" and lands at #destination.simpleName'() {
 		when:
-		asUserTo('user@example.com', UserInfoPage)
+		loginTo(passedUsername, asAdmin, destination)
 
 		then:
-		page in UserInfoPage
+		page.getClass() == destination
 		verifyAt()
 		loggedIn
-		userName == 'user@example.com'
+		isAdmin == asAdmin
+		userName == passedUsername
+
+		where:
+		[asAdmin, destination, passedUsername] << [[true, false], [UserInfoPage, AnotherUserInfoPage], ['foo@example.com', 'bar@example.com']].combinations()
+		scenario = asAdmin ? 'admin' : 'user'
 	}
 }

@@ -14,21 +14,9 @@
  * limitations under the License.
  */
 
-package groovyx.gaelyk.functional.geb
+package groovyx.gaelyk.functional.geb.page
 
-import geb.spock.GebSpec
-import geb.Page
-import groovyx.gaelyk.functional.gae.LoginUrlProvider
-import groovyx.gaelyk.functional.geb.page.LoginPage
-
-@Category(GebSpec)
-class LoginCategory {
-	public void loginTo(String username, boolean loginAsAdmin, Class<? extends Page> destinationPage) {
-		go new LoginUrlProvider().getUrl(baseUrl, destinationPage.url)
-		page LoginPage
-		email = username
-		asAdmin = loginAsAdmin
-		loginButton.click()
-		page destinationPage
-	}
+class AnotherUserInfoPage extends UserInfoPage {
+	static url = 'anotherUserInfo'
+	static at = { title == 'Another User Info Page' }
 }

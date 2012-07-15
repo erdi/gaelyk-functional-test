@@ -26,5 +26,6 @@ class UserInfoPage extends Page {
 	static content = {
 		loggedIn(required: false) { $('#logged-in').text().toBoolean() }
 		userName { $('#username').text() }
+		isAdmin { $('#is-admin').text().toBoolean() }
 	}
 }
