@@ -27,5 +27,6 @@ class UserInfoPage extends Page {
 		loggedIn(required: false) { $('#logged-in').text().toBoolean() }
 		userName { $('#username').text() }
 		isAdmin { $('#is-admin').text().toBoolean() }
+		params { $('input').inject([:]) { map, input -> map << new MapEntry(input.attr('name'), input.value()) }}
 	}
 }

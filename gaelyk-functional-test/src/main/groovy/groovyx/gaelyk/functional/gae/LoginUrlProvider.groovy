@@ -17,18 +17,44 @@
 package groovyx.gaelyk.functional.gae
 
 import groovyx.gaelyk.functional.remote.RemoteControl
+import geb.Page
 
 class LoginUrlProvider {
-	String getUrl(String baseUrl, String path) {
+	private String toQueryString(Map params) {
+		if (params) {
+			params.collect { name, value ->
+				def values = value instanceof Collection ? value : [value]
+				values.collect { v ->
+					"${URLEncoder.encode(name.toString(), "UTF-8")}=${URLEncoder.encode(v.toString(), "UTF-8")}"
+				}
+			}.flatten().join("&")
+		} else {
+			""
+		}
+	}
+
+	String getUrl(String baseUrl, Page page, Map params, Object[] args) {
 		URI uri
-		if (path) {
-			uri = new URI(path)
+		if (page.url) {
+			uri = new URI(page.url)
 			if (!uri.absolute) {
 				uri = new URI(baseUrl).resolve(uri)
 			}
 		} else {
 			uri = new URI(baseUrl)
 		}
+
+		String path = page.convertToPath(args)
+		if (path) {
+			uri = new URL(uri.toString() + path).toURI()
+		}
+
+		def queryString = toQueryString(params)
+		if (queryString) {
+			def joiner = uri.query ? '&' : '?'
+			uri = new URL(uri.toString() + joiner + queryString).toURI()
+		}
+
 		new RemoteControl().exec { users.createLoginURL(uri.toString()) }
 	}
 }

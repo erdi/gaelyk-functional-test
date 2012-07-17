@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 
-get '/userInfo', forward: 'WEB-INF/pages/userInfo.gtpl'
-get '/anotherUserInfo', forward: 'WEB-INF/pages/anotherUserInfo.gtpl'
+get '/userInfo', forward: '/WEB-INF/pages/userInfo.gtpl'
+get '/userInfo/@pathOne/@pathTwo', forward: '/WEB-INF/pages/userInfo.gtpl?pathOne=@pathOne&pathTwo=@pathTwo'
+get '/userInfo/@pathOne', forward: '/WEB-INF/pages/userInfo.gtpl?pathOne=@pathOne'
+
+get '/anotherUserInfo', forward: '/WEB-INF/pages/anotherUserInfo.gtpl'
 

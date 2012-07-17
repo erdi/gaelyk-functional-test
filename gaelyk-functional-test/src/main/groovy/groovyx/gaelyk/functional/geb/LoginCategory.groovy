@@ -23,12 +23,16 @@ import groovyx.gaelyk.functional.geb.page.LoginPage
 
 @Category(GebSpec)
 class LoginCategory {
-	public void loginTo(String username, boolean loginAsAdmin, Class<? extends Page> destinationPage) {
-		go new LoginUrlProvider().getUrl(baseUrl, destinationPage.url)
+	public void loginTo(Map params, String username, boolean loginAsAdmin, Class<? extends Page> destinationPage, Object[] args) {
+		go new LoginUrlProvider().getUrl(baseUrl, destinationPage.newInstance().init(browser), params, args)
 		page LoginPage
 		email = username
 		asAdmin = loginAsAdmin
 		loginButton.click()
 		page destinationPage
+	}
+
+	public void loginTo(String username, boolean loginAsAdmin, Class<? extends Page> destinationPage, Object[] args) {
+		loginTo([:], username, loginAsAdmin, destinationPage, args)
 	}
 }
