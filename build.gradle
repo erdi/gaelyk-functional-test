@@ -3,7 +3,7 @@ apply from: "gradle/idea.gradle"
 
 buildscript {
 	ext {
-		gaePluginVersion = '0.7.2'
+		gaePluginVersion = '0.7.6'
 		gaelykPluginVersion = '0.3.2'
 		gaeGebPluginVersion = '0.3'
 	}
