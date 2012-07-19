@@ -1,6 +1,7 @@
 dependencies {
-	compile 'org.gaelyk:gaelyk-remote:0.1',
-		"org.codehaus.geb:geb-spock:$gebVersion"
+	compile "org.gaelyk:gaelyk-remote:$gaelykRemoteVersion",
+		"org.codehaus.geb:geb-spock:$gebVersion",
+		project(':gaelyk-functional-test-datastore-builder')
 	compile "org.spockframework:spock-core:$spockVersion", {
 		exclude group: 'org.codehaus.groovy', module: 'groovy-all'
 	}

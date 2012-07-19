@@ -21,15 +21,16 @@ buildscript {
 
 subprojects {
 	apply plugin: 'groovy'
-	apply plugin: "idea"
+	apply plugin: 'idea'
 
 	ext {
 		groovyVersion = '1.8.6'
-		gaeVersion = '1.6.6'
+		gaeVersion = '1.7.0'
 		gaelykVersion = '1.2'
 		gebVersion = '0.7.0'
 		spockVersion = '0.6-groovy-1.8'
 		seleniumVersion = '2.22.0'
+		gaelykRemoteVersion = '0.1'
 
 		compatibilityVersion = 1.5
 	}
@@ -52,14 +53,17 @@ configure(subprojects.findAll {it.name.startsWith('test-project')}) {
 	apply plugin: 'gae-geb'
 
 	dependencies {
-		compile "org.gaelyk:gaelyk:$gaelykVersion",
-				project(':gaelyk-functional-test')
+		compile "org.gaelyk:gaelyk:$gaelykVersion"
+
+		runtime "org.gaelyk:gaelyk-remote:$gaelykRemoteVersion",
+			project(':gaelyk-functional-test-datastore-builder')
 
 		gaeSdk "com.google.appengine:appengine-java-sdk:$gaeVersion"
 
 		testCompile "org.spockframework:spock-core:$spockVersion", {
 			exclude group: 'org.codehaus.groovy', module: 'groovy-all'
 		}
+		functionalTestCompile project(':gaelyk-functional-test')
 	}
 
 	gae {
