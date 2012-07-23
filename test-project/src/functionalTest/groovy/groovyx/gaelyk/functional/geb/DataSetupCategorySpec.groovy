@@ -65,7 +65,7 @@ class DataSetupCategorySpec extends Specification {
 		remote.exec { datastore.execute { select single from category where name == 'Groovy' }.key.id } == 1234
 	}
 
-	def 'builder calls save and return configured entity'() {
+	def 'setup calls save and return configured entity'() {
 		when:
 		setupData {
 			def groovyCategory = category {

@@ -22,7 +22,7 @@ import org.spockframework.runtime.extension.IMethodInterceptor
 abstract class DatastoreCleaningInterceptor implements IMethodInterceptor {
 	protected DatastoreCleaner cleaner
 
-	DatastoreCleaningInterceptor(DatastoreCleaner cleaner) {
+	protected DatastoreCleaningInterceptor(DatastoreCleaner cleaner) {
 		this.cleaner = cleaner
 	}
 }

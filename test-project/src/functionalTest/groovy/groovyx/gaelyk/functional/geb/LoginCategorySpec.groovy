@@ -54,7 +54,8 @@ class LoginCategorySpec extends GebSpec {
 		loggedInAs(passedUsername, asAdmin)
 
 		where:
-		[asAdmin, destination, passedUsername] << [[true, false], [UserInfoPage, AnotherUserInfoPage], ['foo@example.com', 'bar@example.com']].combinations()
+		[asAdmin, destination, passedUsername] <<
+			[[true, false], [UserInfoPage, AnotherUserInfoPage], ['foo@example.com', 'bar@example.com']].combinations()
 		scenario = asAdmin ? 'admin' : 'user'
 	}
 

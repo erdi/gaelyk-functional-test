@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package groovyx.gaelyk.functional.spock;
+package groovyx.gaelyk.functional.spock
 
 
 import spock.lang.Specification
@@ -25,7 +25,7 @@ import org.spockframework.runtime.model.MethodInfo
 import spock.lang.Unroll
 import java.lang.reflect.AnnotatedElement
 
-public class FeatureDatastoreCleaningInterceptorSpec extends Specification {
+class FeatureDatastoreCleaningInterceptorSpec extends Specification {
 	@Unroll
 	def 'proceed is being called after interception'() {
 		given:

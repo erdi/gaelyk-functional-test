@@ -22,7 +22,7 @@ import groovyx.gaelyk.functional.datastore.DataBuilder
 class DataSetupProvider {
 	void setupData(Closure builder) {
 		new RemoteControl().exec(contextClosures: [builder]) {
-			new DataBuilder().build(builder)
+			new DataBuilder().setupData(builder)
 		}
 	}
 }

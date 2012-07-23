@@ -24,7 +24,8 @@ import org.spockframework.runtime.model.MethodInfo
 import spock.lang.Stepwise
 
 class ModifiesDatastoreExtension extends AbstractAnnotationDrivenExtension<ModifiesDatastore> {
-	FeatureDatastoreCleaningInterceptor featureBasedInterceptor = new FeatureDatastoreCleaningInterceptor(new DatastoreCleaner())
+	FeatureDatastoreCleaningInterceptor featureBasedInterceptor = new FeatureDatastoreCleaningInterceptor(
+		new DatastoreCleaner())
 
 	@Override
 	void visitFeatureAnnotation(ModifiesDatastore annotation, FeatureInfo feature) {
@@ -36,7 +37,8 @@ class ModifiesDatastoreExtension extends AbstractAnnotationDrivenExtension<Modif
 
 	@Override
 	void visitSpecAnnotation(ModifiesDatastore annotation, SpecInfo spec) {
-		MethodInfo intercepted = spec.reflection.isAnnotationPresent(Stepwise) ? spec.cleanupSpecMethod : spec.cleanupMethod
+		MethodInfo intercepted = spec.reflection.isAnnotationPresent(Stepwise) ? spec.cleanupSpecMethod :
+			spec.cleanupMethod
 		intercepted.addInterceptor(new SpecDatastoreCleaningInterceptor(new DatastoreCleaner()))
 	}
 }

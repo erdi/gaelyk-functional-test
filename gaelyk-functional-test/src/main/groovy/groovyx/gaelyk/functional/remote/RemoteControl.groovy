@@ -23,14 +23,15 @@ class RemoteControl extends groovyx.remote.client.RemoteControl {
 	static final String ENDPOINT_PROPERTY_NAME = 'gaelyk.remote.endpoint'
 
 	RemoteControl() {
-		super(new HttpTransport(getRemoteControlServletUrl(), Thread.currentThread().contextClassLoader), Thread.currentThread().contextClassLoader)
+		super(new HttpTransport(determineRemoteControlServletUrl(), Thread.currentThread().contextClassLoader),
+			Thread.currentThread().contextClassLoader)
 	}
 
 	private static String getRemoteControlServletEndpoint() {
 		System.getProperty(ENDPOINT_PROPERTY_NAME) ?: 'remote-control'
 	}
 
-	private static String getRemoteControlServletUrl() {
+	private static String determineRemoteControlServletUrl() {
 		def conf = new ConfigurationLoader().conf
 		"${conf.baseUrl}$remoteControlServletEndpoint"
 	}

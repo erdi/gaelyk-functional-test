@@ -16,9 +16,9 @@
 
 package groovyx.gaelyk.functional.datastore
 
-import groovyx.gaelyk.functional.util.DatastoreStateAwareSpec;
+import groovyx.gaelyk.functional.util.DatastoreStateAwareSpec
 
-public class DatastoreCleanerSpec extends DatastoreStateAwareSpec {
+class DatastoreCleanerSpec extends DatastoreStateAwareSpec {
 	DatastoreCleaner cleaner = new DatastoreCleaner()
 
 	def clean() {

@@ -17,9 +17,7 @@
 package groovyx.gaelyk.functional.datastore
 
 import groovyx.gaelyk.functional.util.DatastoreStateAwareSpec
-import com.google.appengine.api.datastore.Entity
 import spock.lang.Stepwise
-import groovyx.gaelyk.functional.remote.RemoteControl
 
 @Stepwise
 class DatastoreStateAwareSpecSpec extends DatastoreStateAwareSpec {

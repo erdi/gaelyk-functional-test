@@ -19,16 +19,16 @@ package groovyx.gaelyk.functional.datastore
 import com.google.appengine.api.datastore.Entity
 
 class DataBuilder {
-	void build(Closure builder) {
+	void setupData(Closure builder) {
 		builder.setDelegate(this)
 		builder.call()
 	}
 
 	def methodMissing(String name, args) {
 		if (validateArgs(args)) {
-			args = args as Stack
-			def configureClosure = args.pop()
-			def entity = new Entity(name, *args)
+			def argsStack = args as Stack
+			def configureClosure = argsStack.pop()
+			def entity = new Entity(name, *argsStack)
 			entity.with(configureClosure)
 			entity.save()
 			entity

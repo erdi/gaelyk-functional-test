@@ -20,16 +20,17 @@ import groovyx.gaelyk.functional.remote.RemoteControl
 import geb.Page
 
 class LoginUrlProvider {
+	private final static String UTF_8 = 'UTF-8'
 	private String toQueryString(Map params) {
 		if (params) {
 			params.collect { name, value ->
 				def values = value instanceof Collection ? value : [value]
 				values.collect { v ->
-					"${URLEncoder.encode(name.toString(), "UTF-8")}=${URLEncoder.encode(v.toString(), "UTF-8")}"
+					"${URLEncoder.encode(name.toString(), UTF_8)}=${URLEncoder.encode(v.toString(), UTF_8)}"
 				}
-			}.flatten().join("&")
+			}.flatten().join('&')
 		} else {
-			""
+			''
 		}
 	}
 

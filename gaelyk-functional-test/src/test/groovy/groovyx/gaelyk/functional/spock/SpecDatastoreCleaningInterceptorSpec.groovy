@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package groovyx.gaelyk.functional.spock;
+package groovyx.gaelyk.functional.spock
 
 
 import spock.lang.Specification
 import org.spockframework.runtime.extension.IMethodInvocation
 import groovyx.gaelyk.functional.datastore.DatastoreCleaner
 
-public class SpecDatastoreCleaningInterceptorSpec extends Specification {
+class SpecDatastoreCleaningInterceptorSpec extends Specification {
 	def 'proceed is being called after interception'() {
 		given:
 		DatastoreCleaner mockCleaner = Mock()
