@@ -1,5 +1,6 @@
 include 'gaelyk-functional-test',
 	'gaelyk-functional-test-datastore-builder',
 	'test-project',
-	'test-project-different-endpoint'
+	'test-project-different-endpoint',
+	'manual'
 rootProject.name = 'gaelyk-functional-test-all'
