@@ -16,7 +16,11 @@ task tokeniseManual(type: Copy) {
 
 	ext.substitutionProperties = [
 		"gftt-version": project.version,
-		"created-at": new java.text.SimpleDateFormat("MMMM, yyyy").format(new Date())
+		"created-at": new java.text.SimpleDateFormat("MMMM, yyyy").format(new Date()),
+		"gaelyk-remote-version": project.gaelykRemoteVersion,
+		"spock-version": project.spockVersion,
+		"geb-version": project.gebVersion,
+		"gae-geb-plugin-version": project.gaeGebPluginVersion
 	]
 
 	inputs.properties(substitutionProperties)

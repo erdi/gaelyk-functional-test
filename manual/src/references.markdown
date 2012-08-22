@@ -1,1 +1,9 @@
 [gaelyk]: http://gaelyk.org
+[spock]: http://spockframework.org
+[blog]: http://blog.proxerd.pl
+[bloogaey-clone]: https://github.com/erdi/bloogaey
+[gaelyk-remote]: https://github.com/erdi/gaelyk-remote
+[geb]: http://gebish.org
+[gradle-conflict-resolution]: http://gradle.org/docs/current/userguide/dependency_management.html#sub:version_conflicts
+[override-remote-url]: remote.html#overriding_the_default_remote_control_url
+[gradle-gae-geb-plugin]: https://github.com/erdi/gradle-gae-geb-plugin
