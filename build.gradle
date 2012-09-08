@@ -40,7 +40,9 @@ subprojects {
 
 	repositories {
 		mavenCentral()
-		mavenLocal()
+		maven {
+			url 'https://oss.sonatype.org/content/repositories/orggaelyk-272/'
+		}
 	}
 
 	dependencies {

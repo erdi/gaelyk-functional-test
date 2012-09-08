@@ -21,7 +21,7 @@ import groovyx.gaelyk.functional.datastore.DataBuilder
 
 class DataSetupProvider {
 	void setupData(Closure builder) {
-		new RemoteControl().exec(contextClosures: [builder]) {
+		new RemoteControl().exec(usedClosures: [builder]) {
 			new DataBuilder().setupData(builder)
 		}
 	}
