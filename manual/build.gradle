@@ -1,3 +1,5 @@
+apply plugin: 'github-pages'
+
 buildscript {
 	repositories {
 		mavenRepo (name: "Alkemist's GitHub", url: "http://cloud.github.com/downloads/alkemist") {
@@ -6,7 +8,8 @@ buildscript {
 		mavenCentral()
 	}
 	dependencies {
-		classpath "markdown2book:markdown2book:1.0-SNAPSHOT"
+		classpath 'markdown2book:markdown2book:1.0-SNAPSHOT'
+		classpath 'org.ajoberstar:gradle-git:0.2.0'
 	}
 }
 
@@ -51,3 +54,7 @@ task compileManual {
 		new markdown2book.Generator(source, destination, encoding).generate()
 	}
 }
+
+githubPages.repoUri = 'git@github.com:erdi/gaelyk-functional-test.git'
+githubPages.pages { from compileManual.outputs }
+processGhPages.dependsOn(compileManual)

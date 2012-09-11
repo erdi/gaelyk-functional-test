@@ -1,5 +1,5 @@
 apply plugin: 'idea'
-apply from: "gradle/idea.gradle"
+apply from: 'gradle/idea.gradle'
 
 buildscript {
 	ext {
