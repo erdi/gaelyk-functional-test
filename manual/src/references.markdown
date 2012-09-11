@@ -7,3 +7,12 @@
 [gradle-conflict-resolution]: http://gradle.org/docs/current/userguide/dependency_management.html#sub:version_conflicts
 [override-remote-url]: remote.html#overriding_the_default_remote_control_url
 [gradle-gae-geb-plugin]: https://github.com/erdi/gradle-gae-geb-plugin
+[remote-endpoint-configuration]: intro.html#setting_up_remote_control_endpoint
+[remote-context]: https://github.com/erdi/gaelyk-remote#gaelyk-specific-variables-in-remote-context
+[modifies-datastore-on-feature]: https://github.com/erdi/gaelyk-functional-test/blob/master/test-project/src/functionalTest/groovy/groovyx/gaelyk/functional/spock/ModifiesDatastoreOnFeatureSpec.groovy
+[modifies-datastore-on-spec]: https://github.com/erdi/gaelyk-functional-test/blob/master/test-project/src/functionalTest/groovy/groovyx/gaelyk/functional/spock/ModifiesDatastoreOnSpecSpec.groovy
+[modifies-datastore-on-stepwise-spec]: https://github.com/erdi/gaelyk-functional-test/blob/master/test-project/src/functionalTest/groovy/groovyx/gaelyk/functional/spock/ModifiesDatastoreOnStepwiseSpecSpec.groovy
+[grails-fixtures]: http://gpc.github.com/grails-fixtures/docs/guide/3.%20Loading%20Fixtures.html#3.1%20Inline%20Fixtures
+[data-setup-category-spec]: https://github.com/erdi/gaelyk-functional-test/blob/master/test-project/src/functionalTest/groovy/groovyx/gaelyk/functional/geb/DataSetupCategorySpec.groovy
+[gae-authentication]: https://developers.google.com/appengine/articles/auth
+[to-method]: http://www.gebish.org/manual/current/api/geb/Browser.html#to%28java.lang.Class,%20java.lang.Object%29

@@ -13,16 +13,20 @@ Currently the library provides:
 
 > This section assumes that you are using Gradle and gradle-gaelyk-plugin version 0.4 or newer to build your project.
 
+### Dependency on gaelyk-functional-test
+
 The first step to use the library is to add a dependency on it to `functionalTestCompile` configuration:
 
 	dependencies {
-		functionalTestCompile org.gaelyk:gaelyk-functional-test:@gftt-version@
+		functionalTestCompile 'org.gaelyk:gaelyk-functional-test:@gftt-version@'
 	}
+
+### Setting up remote control endpoint
 
 The library depends on a [gaelyk-remote][gaelyk-remote] endpoint to be exposed at a specific url. To configure that you have to first add a runtime dependency on gaelyk-remote:
 
 	dependencies {
-		runtime "org.gaelyk:gaelyk-remote:@gaelyk-remote-version@",
+		runtime 'org.gaelyk:gaelyk-remote:@gaelyk-remote-version@'
 	}
 
 and also add a servlet mapping to your `web.xml` file:
@@ -52,6 +56,14 @@ The custom `RemoteControl` class uses Geb's `baseUrl` configuration property to 
 	}
 
 	apply plugin: 'gae-geb'
+
+### Dependency on gaelyk-functional-test-datastore-builder
+
+If you wish to use the DSL for setting up data in the datastore you also have to add a runtime dependency on datastore builder:
+
+	dependencies {
+		runtime 'org.gaelyk:gaelyk-functional-test-datastore-builder:@gftt-version@'
+	}
 
 ## Dependencies
 
