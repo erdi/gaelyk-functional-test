@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link href="css/stylesheet.css" rel="stylesheet" type="text/css">
+  <title>Gaelyk Functional Test Tools - Introduction - version 0.1</title>
+
+  <link type="text/css" rel="stylesheet" href="css/shCore.css"></link>
+  <link type="text/css" rel="stylesheet" href="css/shThemeEclipse.css"></link>
+  <script language="javascript" src="js/shCore.js"></script>
+  <script language="javascript" src="js/shBrushGroovy.js"></script>
+  <script type="text/javascript" src="js/jquery-1.6.1.min.js"></script>
+  <script type="text/javascript" src="js/syntaxhighlight.js"></script>
+  <script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-15031038-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+  </script>
+</head>
+
+<body>
+  <div id="wrapper">
+    <div id="header">
+      
+      <span class="center"><a href="index.html">Table of Contents</a></span>
+      <span class="right"><a href="remote.html">Using RemoteControl class to easily modify state of your remote application under test</a> &#x25B6;</span>
+    </div>
+    <hr />
+    <div class="page_toc">
+      <h3>Chapter Contents</h3>
+      <ul><li><span class='toc_number'>1</span><a href='intro.html#introduction'>Introduction</a><ul><li><span class='toc_number'>1.1</span><a href='intro.html#project_setup'>Project setup</a><ul><li><span class='toc_number'>1.1.1</span><a href='intro.html#dependency_on_gaelyk_functional_test'>Dependency on gaelyk-functional-test</a></li><li><span class='toc_number'>1.1.2</span><a href='intro.html#setting_up_remote_control_endpoint'>Setting up remote control endpoint</a></li><li><span class='toc_number'>1.1.3</span><a href='intro.html#dependency_on_gaelyk_functional_test_datastore_builder'>Dependency on gaelyk-functional-test-datastore-builder</a></li></ul><span class='toc_number'>1.2</span><a href='intro.html#dependencies'>Dependencies</a></li></ul></li></ul></li></ul></li></ul>
+    </div>
+    <hr />
+    <h1><span id='introduction'>1</span> Introduction</h1>
+
+<p>Gaelyk Functional Test Tools is a set of helpers to make functional testing of <a href="http://gaelyk.org">Gaelyk</a> applications easier. This is just some code that seemed common enough to be extracted as a separate library which got written while working on my <a href="http://blog.proxerd.pl">blog</a> that is <a href="https://github.com/erdi/bloogaey">written using Gaelyk</a>.</p>
+
+<p>Currently the library provides:</p>
+
+<ul>
+<li>own <code>RemoteControl</code> class that determines the remote control url based on conventions so that you don't have to specify one all the time</li>
+<li><code>@ModifiesDatastore</code> <a href="http://spockframework.org">Spock</a> extension that allows to wipe out datastore after running certain features</li>
+<li>a simple DSL for setting up data in the datastore if your feature needs a certain data state to run</li>
+<li><code>loginTo</code> method that allows to go to a <code>Page</code> after logging into the application using default GAE authentication</li>
+</ul>
+
+<h2><span id='project_setup'>1.1</span> Project setup</h2>
+
+<blockquote>
+  <p>This section assumes that you are using Gradle and gradle-gaelyk-plugin version 0.4 or newer to build your project.</p>
+</blockquote>
+
+<h3><span id='dependency_on_gaelyk_functional_test'>1.1.1</span> Dependency on gaelyk-functional-test</h3>
+
+<p>The first step to use the library is to add a dependency on it to <code>functionalTestCompile</code> configuration:</p>
+
+<pre><code>dependencies {
+    functionalTestCompile 'org.gaelyk:gaelyk-functional-test:0.1'
+}
+</code></pre>
+
+<h3><span id='setting_up_remote_control_endpoint'>1.1.2</span> Setting up remote control endpoint</h3>
+
+<p>The library depends on a <a href="https://github.com/erdi/gaelyk-remote">gaelyk-remote</a> endpoint to be exposed at a specific url. To configure that you have to first add a runtime dependency on gaelyk-remote:</p>
+
+<pre><code>dependencies {
+    runtime 'org.gaelyk:gaelyk-remote:0.1'
+}
+</code></pre>
+
+<p>and also add a servlet mapping to your <code>web.xml</code> file:</p>
+
+<pre><code>&lt;servlet&gt;
+    &lt;servlet-name&gt;RemoteControlServlet&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;groovyx.gaelyk.remote.RemoteControlServlet&lt;/servlet-class&gt;
+&lt;/servlet&gt;
+
+&lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;RemoteControlServlet&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/remote-control&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+</code></pre>
+
+<blockquote>
+  <p>If you wish to expose gaelyk-remote servlet at different url you will need to <a href="remote.html#overriding_the_default_remote_control_url">override the default remote control url</a> for the custom <code>RemoteControl</code> class delivered by the library</p>
+</blockquote>
+
+<p>The custom <code>RemoteControl</code> class uses Geb's <code>baseUrl</code> configuration property to determine the base url of the gaelyk-remote servlet. The easiest way to configure that property is to apply <a href="https://github.com/erdi/gradle-gae-geb-plugin">gradle-gae-geb-plugin</a> to the project:</p>
+
+<pre><code>buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "org.gradle.api.plugins:gradle-gae-geb-plugin:0.3"
+    }
+}
+
+apply plugin: 'gae-geb'
+</code></pre>
+
+<h3><span id='dependency_on_gaelyk_functional_test_datastore_builder'>1.1.3</span> Dependency on gaelyk-functional-test-datastore-builder</h3>
+
+<p>If you wish to use the DSL for setting up data in the datastore you also have to add a runtime dependency on datastore builder:</p>
+
+<pre><code>dependencies {
+    runtime 'org.gaelyk:gaelyk-functional-test-datastore-builder:0.1'
+}
+</code></pre>
+
+<h2><span id='dependencies'>1.2</span> Dependencies</h2>
+
+<p>The library integrates Gaelyk with <a href="https://github.com/erdi/gaelyk-remote">gaelyk-remote</a>, <a href="http://spockframework.org">Spock</a> and <a href="http://gebish.org">Geb</a>. Currently it brings the following versions of the aforementioned tools into dependencies:</p>
+
+<ul>
+<li>org.gaelyk:gaelyk-remote:0.1</li>
+<li>org.spockframework:spock-core:0.6-groovy-1.8</li>
+<li>org.codehaus.geb:geb-spock:0.7.0</li>
+</ul>
+
+<p>The library is simple enough to assume that newer versions of those dependencies should still work. Just simply specify them in your <code>build.gradle</code> and they will overwrite the ones specified in the library - by default <a href="http://gradle.org/docs/current/userguide/dependency_management.html#sub:version_conflicts">the newest version of the dependency is used by Gradle if there is a conflict</a>.</p>
+
+    <hr />
+    <div id="footer">
+      
+      <span class="center"><a href="index.html">Table of Contents</a></span>
+      <span class="right"><a href="remote.html">Using RemoteControl class to easily modify state of your remote application under test</a> &#x25B6;</span>
+    </div>
+  </div>
+  <p style="text-align: center">
+    Gaelyk Functional Test Tools Documentation - 0.1 - September, 2012<br />
+    Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a>
+  </p>
+</body>
+</html>

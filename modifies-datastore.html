@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link href="css/stylesheet.css" rel="stylesheet" type="text/css">
+  <title>Gaelyk Functional Test Tools - Cleaning up datastore after tests execution with @ModifiesDatastore Spock extension - version 0.1</title>
+
+  <link type="text/css" rel="stylesheet" href="css/shCore.css"></link>
+  <link type="text/css" rel="stylesheet" href="css/shThemeEclipse.css"></link>
+  <script language="javascript" src="js/shCore.js"></script>
+  <script language="javascript" src="js/shBrushGroovy.js"></script>
+  <script type="text/javascript" src="js/jquery-1.6.1.min.js"></script>
+  <script type="text/javascript" src="js/syntaxhighlight.js"></script>
+  <script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-15031038-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+  </script>
+</head>
+
+<body>
+  <div id="wrapper">
+    <div id="header">
+      <span class="left">&#x25C0; <a href="remote.html">Using RemoteControl class to easily modify state of your remote application under test</a></span>
+      <span class="center"><a href="index.html">Table of Contents</a></span>
+      <span class="right"><a href="setup-data.html">Setting up datastore state using the DSL provided by DataSetupCategory</a> &#x25B6;</span>
+    </div>
+    <hr />
+    <div class="page_toc">
+      <h3>Chapter Contents</h3>
+      <ul><li><span class='toc_number'>3</span><a href='modifies-datastore.html#cleaning_up_datastore_after_tests_execution_with_modifiesdatastore_spock_extension'>Cleaning up datastore after tests execution with @ModifiesDatastore Spock extension</a><ul><li><span class='toc_number'>3.1</span><a href='modifies-datastore.html#examples'>Examples</a><ul><li><span class='toc_number'>3.1.1</span><a href='modifies-datastore.html#annotating_a_feature'>Annotating a feature</a></li><li><span class='toc_number'>3.1.2</span><a href='modifies-datastore.html#annotating_a_non_stepwise_specification'>Annotating a non-stepwise specification</a></li><li><span class='toc_number'>3.1.3</span><a href='modifies-datastore.html#annotating_a_stepwise_specification'>Annotating a stepwise specification</a></li></ul></li></ul></li></ul></li></ul>
+    </div>
+    <hr />
+    <h1><span id='cleaning_up_datastore_after_tests_execution_with_modifiesdatastore_spock_extension'>3</span> Cleaning up datastore after tests execution with @ModifiesDatastore Spock extension</h1>
+
+<p>If your tests need to setup some data before running or the actions performed in a test modify the datastore you obviously want to clear the changes after the test has run so that next test can start with a clean datastore. There is a <code>@ModifiesDatastore</code> <a href="http://spockframework.org">Spock</a> extension available as a part of the library that comes to your rescue in such situations.</p>
+
+<h2><span id='examples'>3.1</span> Examples</h2>
+
+<h3><span id='annotating_a_feature'>3.1.1</span> Annotating a feature</h3>
+
+<p>If you annotate a feature method then datastore will be cleaned up every time after your feature has been executed. See <a href="https://github.com/erdi/gaelyk-functional-test/blob/master/test-project/src/functionalTest/groovy/groovyx/gaelyk/functional/spock/ModifiesDatastoreOnFeatureSpec.groovy"><code>ModifiesDatastoreOnFeatureSpec</code></a> for an example.</p>
+
+<h3><span id='annotating_a_non_stepwise_specification'>3.1.2</span> Annotating a non-stepwise specification</h3>
+
+<p>If you annotate a non-stepwise specification then datastore will be cleaned up after every feature execution in that specification. See <a href="https://github.com/erdi/gaelyk-functional-test/blob/master/test-project/src/functionalTest/groovy/groovyx/gaelyk/functional/spock/ModifiesDatastoreOnSpecSpec.groovy"><code>ModifiesDatastoreOnSpecSpec</code></a> for an example.</p>
+
+<h3><span id='annotating_a_stepwise_specification'>3.1.3</span> Annotating a stepwise specification</h3>
+
+<p>If you annotate a stepwise specification then datastore will be cleaned up only after the execution of the last feature in that specification. See <a href="https://github.com/erdi/gaelyk-functional-test/blob/master/test-project/src/functionalTest/groovy/groovyx/gaelyk/functional/spock/ModifiesDatastoreOnStepwiseSpecSpec.groovy"><code>ModifiesDatastoreOnStepwiseSpecSpec</code></a> for an example.</p>
+
+    <hr />
+    <div id="footer">
+      <span class="left">&#x25C0; <a href="remote.html">Using RemoteControl class to easily modify state of your remote application under test</a></span>
+      <span class="center"><a href="index.html">Table of Contents</a></span>
+      <span class="right"><a href="setup-data.html">Setting up datastore state using the DSL provided by DataSetupCategory</a> &#x25B6;</span>
+    </div>
+  </div>
+  <p style="text-align: center">
+    Gaelyk Functional Test Tools Documentation - 0.1 - September, 2012<br />
+    Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a>
+  </p>
+</body>
+</html>

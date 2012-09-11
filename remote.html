@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link href="css/stylesheet.css" rel="stylesheet" type="text/css">
+  <title>Gaelyk Functional Test Tools - Using RemoteControl class to easily modify state of your remote application under test - version 0.1</title>
+
+  <link type="text/css" rel="stylesheet" href="css/shCore.css"></link>
+  <link type="text/css" rel="stylesheet" href="css/shThemeEclipse.css"></link>
+  <script language="javascript" src="js/shCore.js"></script>
+  <script language="javascript" src="js/shBrushGroovy.js"></script>
+  <script type="text/javascript" src="js/jquery-1.6.1.min.js"></script>
+  <script type="text/javascript" src="js/syntaxhighlight.js"></script>
+  <script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-15031038-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+  </script>
+</head>
+
+<body>
+  <div id="wrapper">
+    <div id="header">
+      <span class="left">&#x25C0; <a href="intro.html">Introduction</a></span>
+      <span class="center"><a href="index.html">Table of Contents</a></span>
+      <span class="right"><a href="modifies-datastore.html">Cleaning up datastore after tests execution with @ModifiesDatastore Spock extension</a> &#x25B6;</span>
+    </div>
+    <hr />
+    <div class="page_toc">
+      <h3>Chapter Contents</h3>
+      <ul><li><span class='toc_number'>2</span><a href='remote.html#using_remotecontrol_class_to_easily_modify_state_of_your_remote_application_under_test'>Using RemoteControl class to easily modify state of your remote application under test</a><ul><li><span class='toc_number'>2.1</span><a href='remote.html#example'>Example</a></li><li><span class='toc_number'>2.2</span><a href='remote.html#internal_usage'>Internal usage</a></li><li><span class='toc_number'>2.3</span><a href='remote.html#overriding_the_default_remote_control_url'>Overriding the default remote control url</a></li></ul></li></ul></li></ul>
+    </div>
+    <hr />
+    <h1><span id='using_remotecontrol_class_to_easily_modify_state_of_your_remote_application_under_test'>2</span> Using RemoteControl class to easily modify state of your remote application under test</h1>
+
+<p>The library contains a <code>groovyx.gaelyk.functional.remote.RemoteControl</code> class that makes it even simpler to modify the state of your remote server under test. The main aim of the class is to be able to communicate with the remote without the need of passing a remote control endpoint url when constructing the object. Please refer to the documentation of <a href="https://github.com/erdi/gaelyk-remote">gaelyk-remote</a> to learn about <a href="https://github.com/erdi/gaelyk-remote#gaelyk-specific-variables-in-remote-context">Gaelyk specific variables available in remote context</a>.</p>
+
+<h2><span id='example'>2.1</span> Example</h2>
+
+<p>Given that you have properly <a href="intro.html#setting_up_remote_control_endpoint">configured the remote control endpoint</a> the following is an example of checking that there currently are no entities in the datastore:</p>
+
+<pre><code>import groovyx.gaelyk.functional.remote.RemoteControl
+import spock.lang.Specification
+
+class RemoteControlSpec extends Specification {
+    def remote = new RemoteControl()
+
+    void 'there are no entities in the datastore'() {
+        expect:
+        remote.exec { datastore.execute { select count } } == 0
+    }
+}
+</code></pre>
+
+<h2><span id='internal_usage'>2.2</span> Internal usage</h2>
+
+<p>Please note that the class is used by other components of the library thus making proper <a href="intro.html#setting_up_remote_control_endpoint">remote control endpoint configuration</a> essential for the library to work correctly.</p>
+
+<h2><span id='overriding_the_default_remote_control_url'>2.3</span> Overriding the default remote control url</h2>
+
+<p>By default <code>groovyx.gaelyk.functional.remote.RemoteControl</code> class expects the remote control endpoint to be located at <code>remote-control</code>. If for some reason you expose remote control servlet at a different endpoint you have to set <code>gaelyk.remote.endpoint</code> system property to contain your custom endpoint. To achieve that simply put the following in your gradle build file:</p>
+
+<pre><code>gaeFunctionalTest {
+    systemProperty 'gaelyk.remote.endpoint', 'custom-remote-control'
+}
+</code></pre>
+
+    <hr />
+    <div id="footer">
+      <span class="left">&#x25C0; <a href="intro.html">Introduction</a></span>
+      <span class="center"><a href="index.html">Table of Contents</a></span>
+      <span class="right"><a href="modifies-datastore.html">Cleaning up datastore after tests execution with @ModifiesDatastore Spock extension</a> &#x25B6;</span>
+    </div>
+  </div>
+  <p style="text-align: center">
+    Gaelyk Functional Test Tools Documentation - 0.1 - September, 2012<br />
+    Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a>
+  </p>
+</body>
+</html>

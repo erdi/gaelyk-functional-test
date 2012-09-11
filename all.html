@@ -1,0 +1,225 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link href="css/stylesheet.css" rel="stylesheet" type="text/css" media="all">
+  <title>Gaelyk Functional Test Tools</title>
+  
+  <link type="text/css" rel="stylesheet" href="css/shCore.css"></link>
+  <link type="text/css" rel="stylesheet" href="css/shThemeEclipse.css"></link>
+  <script language="javascript" src="js/shCore.js"></script>
+  <script language="javascript" src="js/shBrushGroovy.js"></script>
+  <script type="text/javascript" src="js/jquery-1.6.1.min.js"></script>
+  <script type="text/javascript" src="js/syntaxhighlight.js"></script>
+  <script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-15031038-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+  </script>
+</head>
+
+<body>
+<div id="wrapper">
+  <h1 class="title">Gaelyk Functional Test Tools</h1>
+  <p class="tag">— A set of helpers to make functional testing of Gaelyk applications easier —</p>
+  <div class="toc">
+      <h2>Version 0.1</h2>
+    <ul><li><span class='toc_number'>1</span><a href='all.html#introduction'>Introduction</a><ul><li><span class='toc_number'>1.1</span><a href='all.html#project_setup'>Project setup</a><ul><li><span class='toc_number'>1.1.1</span><a href='all.html#dependency_on_gaelyk_functional_test'>Dependency on gaelyk-functional-test</a></li><li><span class='toc_number'>1.1.2</span><a href='all.html#setting_up_remote_control_endpoint'>Setting up remote control endpoint</a></li><li><span class='toc_number'>1.1.3</span><a href='all.html#dependency_on_gaelyk_functional_test_datastore_builder'>Dependency on gaelyk-functional-test-datastore-builder</a></li></ul><span class='toc_number'>1.2</span><a href='all.html#dependencies'>Dependencies</a></li></ul></li></ul></li></ul></li></ul><ul><li><span class='toc_number'>2</span><a href='all.html#using_remotecontrol_class_to_easily_modify_state_of_your_remote_application_under_test'>Using RemoteControl class to easily modify state of your remote application under test</a><ul><li><span class='toc_number'>2.1</span><a href='all.html#example'>Example</a></li><li><span class='toc_number'>2.2</span><a href='all.html#internal_usage'>Internal usage</a></li><li><span class='toc_number'>2.3</span><a href='all.html#overriding_the_default_remote_control_url'>Overriding the default remote control url</a></li></ul></li></ul></li></ul><ul><li><span class='toc_number'>3</span><a href='all.html#cleaning_up_datastore_after_tests_execution_with_modifiesdatastore_spock_extension'>Cleaning up datastore after tests execution with @ModifiesDatastore Spock extension</a><ul><li><span class='toc_number'>3.1</span><a href='all.html#examples'>Examples</a><ul><li><span class='toc_number'>3.1.1</span><a href='all.html#annotating_a_feature'>Annotating a feature</a></li><li><span class='toc_number'>3.1.2</span><a href='all.html#annotating_a_non_stepwise_specification'>Annotating a non-stepwise specification</a></li><li><span class='toc_number'>3.1.3</span><a href='all.html#annotating_a_stepwise_specification'>Annotating a stepwise specification</a></li></ul></li></ul></li></ul></li></ul><ul><li><span class='toc_number'>4</span><a href='all.html#setting_up_datastore_state_using_the_dsl_provided_by_datasetupcategory'>Setting up datastore state using the DSL provided by DataSetupCategory</a><ul><li><span class='toc_number'>4.1</span><a href='all.html#examples'>Examples</a></li></ul></li></ul><ul><li><span class='toc_number'>5</span><a href='all.html#testing_applications_using_the_default_gae_authentication_mechanism_with_logincategory'>Testing applications using the default GAE authentication mechanism with LoginCategory</a><ul><li><span class='toc_number'>5.1</span><a href='all.html#examples'>Examples</a></li></ul></li></ul>
+  </div>
+  
+    <div class="chapter">
+      <h1><span id='introduction'>1</span> Introduction</h1>
+
+<p>Gaelyk Functional Test Tools is a set of helpers to make functional testing of <a href="http://gaelyk.org">Gaelyk</a> applications easier. This is just some code that seemed common enough to be extracted as a separate library which got written while working on my <a href="http://blog.proxerd.pl">blog</a> that is <a href="https://github.com/erdi/bloogaey">written using Gaelyk</a>.</p>
+
+<p>Currently the library provides:</p>
+
+<ul>
+<li>own <code>RemoteControl</code> class that determines the remote control url based on conventions so that you don't have to specify one all the time</li>
+<li><code>@ModifiesDatastore</code> <a href="http://spockframework.org">Spock</a> extension that allows to wipe out datastore after running certain features</li>
+<li>a simple DSL for setting up data in the datastore if your feature needs a certain data state to run</li>
+<li><code>loginTo</code> method that allows to go to a <code>Page</code> after logging into the application using default GAE authentication</li>
+</ul>
+
+<h2><span id='project_setup'>1.1</span> Project setup</h2>
+
+<blockquote>
+  <p>This section assumes that you are using Gradle and gradle-gaelyk-plugin version 0.4 or newer to build your project.</p>
+</blockquote>
+
+<h3><span id='dependency_on_gaelyk_functional_test'>1.1.1</span> Dependency on gaelyk-functional-test</h3>
+
+<p>The first step to use the library is to add a dependency on it to <code>functionalTestCompile</code> configuration:</p>
+
+<pre><code>dependencies {
+    functionalTestCompile 'org.gaelyk:gaelyk-functional-test:0.1'
+}
+</code></pre>
+
+<h3><span id='setting_up_remote_control_endpoint'>1.1.2</span> Setting up remote control endpoint</h3>
+
+<p>The library depends on a <a href="https://github.com/erdi/gaelyk-remote">gaelyk-remote</a> endpoint to be exposed at a specific url. To configure that you have to first add a runtime dependency on gaelyk-remote:</p>
+
+<pre><code>dependencies {
+    runtime 'org.gaelyk:gaelyk-remote:0.1'
+}
+</code></pre>
+
+<p>and also add a servlet mapping to your <code>web.xml</code> file:</p>
+
+<pre><code>&lt;servlet&gt;
+    &lt;servlet-name&gt;RemoteControlServlet&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;groovyx.gaelyk.remote.RemoteControlServlet&lt;/servlet-class&gt;
+&lt;/servlet&gt;
+
+&lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;RemoteControlServlet&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/remote-control&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+</code></pre>
+
+<blockquote>
+  <p>If you wish to expose gaelyk-remote servlet at different url you will need to <a href="remote.html#overriding_the_default_remote_control_url">override the default remote control url</a> for the custom <code>RemoteControl</code> class delivered by the library</p>
+</blockquote>
+
+<p>The custom <code>RemoteControl</code> class uses Geb's <code>baseUrl</code> configuration property to determine the base url of the gaelyk-remote servlet. The easiest way to configure that property is to apply <a href="https://github.com/erdi/gradle-gae-geb-plugin">gradle-gae-geb-plugin</a> to the project:</p>
+
+<pre><code>buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "org.gradle.api.plugins:gradle-gae-geb-plugin:0.3"
+    }
+}
+
+apply plugin: 'gae-geb'
+</code></pre>
+
+<h3><span id='dependency_on_gaelyk_functional_test_datastore_builder'>1.1.3</span> Dependency on gaelyk-functional-test-datastore-builder</h3>
+
+<p>If you wish to use the DSL for setting up data in the datastore you also have to add a runtime dependency on datastore builder:</p>
+
+<pre><code>dependencies {
+    runtime 'org.gaelyk:gaelyk-functional-test-datastore-builder:0.1'
+}
+</code></pre>
+
+<h2><span id='dependencies'>1.2</span> Dependencies</h2>
+
+<p>The library integrates Gaelyk with <a href="https://github.com/erdi/gaelyk-remote">gaelyk-remote</a>, <a href="http://spockframework.org">Spock</a> and <a href="http://gebish.org">Geb</a>. Currently it brings the following versions of the aforementioned tools into dependencies:</p>
+
+<ul>
+<li>org.gaelyk:gaelyk-remote:0.1</li>
+<li>org.spockframework:spock-core:0.6-groovy-1.8</li>
+<li>org.codehaus.geb:geb-spock:0.7.0</li>
+</ul>
+
+<p>The library is simple enough to assume that newer versions of those dependencies should still work. Just simply specify them in your <code>build.gradle</code> and they will overwrite the ones specified in the library - by default <a href="http://gradle.org/docs/current/userguide/dependency_management.html#sub:version_conflicts">the newest version of the dependency is used by Gradle if there is a conflict</a>.</p>
+
+    </div>
+  
+    <div class="chapter">
+      <h1><span id='using_remotecontrol_class_to_easily_modify_state_of_your_remote_application_under_test'>2</span> Using RemoteControl class to easily modify state of your remote application under test</h1>
+
+<p>The library contains a <code>groovyx.gaelyk.functional.remote.RemoteControl</code> class that makes it even simpler to modify the state of your remote server under test. The main aim of the class is to be able to communicate with the remote without the need of passing a remote control endpoint url when constructing the object. Please refer to the documentation of <a href="https://github.com/erdi/gaelyk-remote">gaelyk-remote</a> to learn about <a href="https://github.com/erdi/gaelyk-remote#gaelyk-specific-variables-in-remote-context">Gaelyk specific variables available in remote context</a>.</p>
+
+<h2><span id='example'>2.1</span> Example</h2>
+
+<p>Given that you have properly <a href="intro.html#setting_up_remote_control_endpoint">configured the remote control endpoint</a> the following is an example of checking that there currently are no entities in the datastore:</p>
+
+<pre><code>import groovyx.gaelyk.functional.remote.RemoteControl
+import spock.lang.Specification
+
+class RemoteControlSpec extends Specification {
+    def remote = new RemoteControl()
+
+    void 'there are no entities in the datastore'() {
+        expect:
+        remote.exec { datastore.execute { select count } } == 0
+    }
+}
+</code></pre>
+
+<h2><span id='internal_usage'>2.2</span> Internal usage</h2>
+
+<p>Please note that the class is used by other components of the library thus making proper <a href="intro.html#setting_up_remote_control_endpoint">remote control endpoint configuration</a> essential for the library to work correctly.</p>
+
+<h2><span id='overriding_the_default_remote_control_url'>2.3</span> Overriding the default remote control url</h2>
+
+<p>By default <code>groovyx.gaelyk.functional.remote.RemoteControl</code> class expects the remote control endpoint to be located at <code>remote-control</code>. If for some reason you expose remote control servlet at a different endpoint you have to set <code>gaelyk.remote.endpoint</code> system property to contain your custom endpoint. To achieve that simply put the following in your gradle build file:</p>
+
+<pre><code>gaeFunctionalTest {
+    systemProperty 'gaelyk.remote.endpoint', 'custom-remote-control'
+}
+</code></pre>
+
+    </div>
+  
+    <div class="chapter">
+      <h1><span id='cleaning_up_datastore_after_tests_execution_with_modifiesdatastore_spock_extension'>3</span> Cleaning up datastore after tests execution with @ModifiesDatastore Spock extension</h1>
+
+<p>If your tests need to setup some data before running or the actions performed in a test modify the datastore you obviously want to clear the changes after the test has run so that next test can start with a clean datastore. There is a <code>@ModifiesDatastore</code> <a href="http://spockframework.org">Spock</a> extension available as a part of the library that comes to your rescue in such situations.</p>
+
+<h2><span id='examples'>3.1</span> Examples</h2>
+
+<h3><span id='annotating_a_feature'>3.1.1</span> Annotating a feature</h3>
+
+<p>If you annotate a feature method then datastore will be cleaned up every time after your feature has been executed. See <a href="https://github.com/erdi/gaelyk-functional-test/blob/master/test-project/src/functionalTest/groovy/groovyx/gaelyk/functional/spock/ModifiesDatastoreOnFeatureSpec.groovy"><code>ModifiesDatastoreOnFeatureSpec</code></a> for an example.</p>
+
+<h3><span id='annotating_a_non_stepwise_specification'>3.1.2</span> Annotating a non-stepwise specification</h3>
+
+<p>If you annotate a non-stepwise specification then datastore will be cleaned up after every feature execution in that specification. See <a href="https://github.com/erdi/gaelyk-functional-test/blob/master/test-project/src/functionalTest/groovy/groovyx/gaelyk/functional/spock/ModifiesDatastoreOnSpecSpec.groovy"><code>ModifiesDatastoreOnSpecSpec</code></a> for an example.</p>
+
+<h3><span id='annotating_a_stepwise_specification'>3.1.3</span> Annotating a stepwise specification</h3>
+
+<p>If you annotate a stepwise specification then datastore will be cleaned up only after the execution of the last feature in that specification. See <a href="https://github.com/erdi/gaelyk-functional-test/blob/master/test-project/src/functionalTest/groovy/groovyx/gaelyk/functional/spock/ModifiesDatastoreOnStepwiseSpecSpec.groovy"><code>ModifiesDatastoreOnStepwiseSpecSpec</code></a> for an example.</p>
+
+    </div>
+  
+    <div class="chapter">
+      <h1><span id='setting_up_datastore_state_using_the_dsl_provided_by_datasetupcategory'>4</span> Setting up datastore state using the DSL provided by DataSetupCategory</h1>
+
+<p>The library provides a very simple DSL for setting up data in a datastore if your test need the datastore to be in a certain state to execute. The DSL is supposed to be a simplified version of <a href="http://gpc.github.com/grails-fixtures/docs/guide/3.%20Loading%20Fixtures.html#3.1%20Inline%20Fixtures">inline fixtures feature of Grails Fixtures plugin</a>.</p>
+
+<h2><span id='examples'>4.1</span> Examples</h2>
+
+<p>To use the DSL you have to annotate your specification with <code>@Mixin(DataSetupCategory)</code> which provides the <code>setupData</code> method. Please refer to <a href="https://github.com/erdi/gaelyk-functional-test/blob/master/test-project/src/functionalTest/groovy/groovyx/gaelyk/functional/geb/DataSetupCategorySpec.groovy"><code>DataSetupCategorySpec</code></a> for examples.</p>
+
+    </div>
+  
+    <div class="chapter">
+      <h1><span id='testing_applications_using_the_default_gae_authentication_mechanism_with_logincategory'>5</span> Testing applications using the default GAE authentication mechanism with LoginCategory</h1>
+
+<p>For applications using the <a href="https://developers.google.com/appengine/articles/auth">default GAE authentication mechanism</a> you might want to test if your application behaves as expected for logged in users and sometimes you might need to log in into the application to access certain parts of it, i.e. administration pages. This is where <code>LoginCategory</code> which provides <code>loginTo</code> method comes in handy.</p>
+
+<h2><span id='examples'>5.1</span> Examples</h2>
+
+<p>To use <code>loginTo</code> method you have to first annotate your specification with <code>@Mixin(LoginCategory)</code></p>
+
+<pre><code>@Mixin(LoginCategory)
+class NeedsToLoginSpec extends GebSpec {
+}
+</code></pre>
+
+<p>After that you can use the <code>loginTo</code> method just like <a href="http://www.gebish.org/manual/current/api/geb/Browser.html#to%28java.lang.Class,%20java.lang.Object%29"><code>to</code> method from Geb</a> with the exception that first too parameters are <code>username</code> of the logged in user and <code>isAdmin</code>, a switch to speify if the logged in user should have admin rights for the application.</p>
+
+    </div>
+  
+  </div>
+  <p style="text-align: center">
+    Gaelyk Functional Test Tools Documentation - 0.1 - September, 2012<br />
+    Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a>
+  </p>
+</body>
+</html>

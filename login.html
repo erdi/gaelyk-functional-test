@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link href="css/stylesheet.css" rel="stylesheet" type="text/css">
+  <title>Gaelyk Functional Test Tools - Testing applications using the default GAE authentication mechanism with LoginCategory - version 0.1</title>
+
+  <link type="text/css" rel="stylesheet" href="css/shCore.css"></link>
+  <link type="text/css" rel="stylesheet" href="css/shThemeEclipse.css"></link>
+  <script language="javascript" src="js/shCore.js"></script>
+  <script language="javascript" src="js/shBrushGroovy.js"></script>
+  <script type="text/javascript" src="js/jquery-1.6.1.min.js"></script>
+  <script type="text/javascript" src="js/syntaxhighlight.js"></script>
+  <script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-15031038-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+  </script>
+</head>
+
+<body>
+  <div id="wrapper">
+    <div id="header">
+      <span class="left">&#x25C0; <a href="setup-data.html">Setting up datastore state using the DSL provided by DataSetupCategory</a></span>
+      <span class="center"><a href="index.html">Table of Contents</a></span>
+      
+    </div>
+    <hr />
+    <div class="page_toc">
+      <h3>Chapter Contents</h3>
+      <ul><li><span class='toc_number'>5</span><a href='login.html#testing_applications_using_the_default_gae_authentication_mechanism_with_logincategory'>Testing applications using the default GAE authentication mechanism with LoginCategory</a><ul><li><span class='toc_number'>5.1</span><a href='login.html#examples'>Examples</a></li></ul></li></ul>
+    </div>
+    <hr />
+    <h1><span id='testing_applications_using_the_default_gae_authentication_mechanism_with_logincategory'>5</span> Testing applications using the default GAE authentication mechanism with LoginCategory</h1>
+
+<p>For applications using the <a href="https://developers.google.com/appengine/articles/auth">default GAE authentication mechanism</a> you might want to test if your application behaves as expected for logged in users and sometimes you might need to log in into the application to access certain parts of it, i.e. administration pages. This is where <code>LoginCategory</code> which provides <code>loginTo</code> method comes in handy.</p>
+
+<h2><span id='examples'>5.1</span> Examples</h2>
+
+<p>To use <code>loginTo</code> method you have to first annotate your specification with <code>@Mixin(LoginCategory)</code></p>
+
+<pre><code>@Mixin(LoginCategory)
+class NeedsToLoginSpec extends GebSpec {
+}
+</code></pre>
+
+<p>After that you can use the <code>loginTo</code> method just like <a href="http://www.gebish.org/manual/current/api/geb/Browser.html#to%28java.lang.Class,%20java.lang.Object%29"><code>to</code> method from Geb</a> with the exception that first too parameters are <code>username</code> of the logged in user and <code>isAdmin</code>, a switch to speify if the logged in user should have admin rights for the application.</p>
+
+    <hr />
+    <div id="footer">
+      <span class="left">&#x25C0; <a href="setup-data.html">Setting up datastore state using the DSL provided by DataSetupCategory</a></span>
+      <span class="center"><a href="index.html">Table of Contents</a></span>
+      
+    </div>
+  </div>
+  <p style="text-align: center">
+    Gaelyk Functional Test Tools Documentation - 0.1 - September, 2012<br />
+    Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a>
+  </p>
+</body>
+</html>

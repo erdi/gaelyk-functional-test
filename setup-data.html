@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link href="css/stylesheet.css" rel="stylesheet" type="text/css">
+  <title>Gaelyk Functional Test Tools - Setting up datastore state using the DSL provided by DataSetupCategory - version 0.1</title>
+
+  <link type="text/css" rel="stylesheet" href="css/shCore.css"></link>
+  <link type="text/css" rel="stylesheet" href="css/shThemeEclipse.css"></link>
+  <script language="javascript" src="js/shCore.js"></script>
+  <script language="javascript" src="js/shBrushGroovy.js"></script>
+  <script type="text/javascript" src="js/jquery-1.6.1.min.js"></script>
+  <script type="text/javascript" src="js/syntaxhighlight.js"></script>
+  <script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-15031038-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+  </script>
+</head>
+
+<body>
+  <div id="wrapper">
+    <div id="header">
+      <span class="left">&#x25C0; <a href="modifies-datastore.html">Cleaning up datastore after tests execution with @ModifiesDatastore Spock extension</a></span>
+      <span class="center"><a href="index.html">Table of Contents</a></span>
+      <span class="right"><a href="login.html">Testing applications using the default GAE authentication mechanism with LoginCategory</a> &#x25B6;</span>
+    </div>
+    <hr />
+    <div class="page_toc">
+      <h3>Chapter Contents</h3>
+      <ul><li><span class='toc_number'>4</span><a href='setup-data.html#setting_up_datastore_state_using_the_dsl_provided_by_datasetupcategory'>Setting up datastore state using the DSL provided by DataSetupCategory</a><ul><li><span class='toc_number'>4.1</span><a href='setup-data.html#examples'>Examples</a></li></ul></li></ul>
+    </div>
+    <hr />
+    <h1><span id='setting_up_datastore_state_using_the_dsl_provided_by_datasetupcategory'>4</span> Setting up datastore state using the DSL provided by DataSetupCategory</h1>
+
+<p>The library provides a very simple DSL for setting up data in a datastore if your test need the datastore to be in a certain state to execute. The DSL is supposed to be a simplified version of <a href="http://gpc.github.com/grails-fixtures/docs/guide/3.%20Loading%20Fixtures.html#3.1%20Inline%20Fixtures">inline fixtures feature of Grails Fixtures plugin</a>.</p>
+
+<h2><span id='examples'>4.1</span> Examples</h2>
+
+<p>To use the DSL you have to annotate your specification with <code>@Mixin(DataSetupCategory)</code> which provides the <code>setupData</code> method. Please refer to <a href="https://github.com/erdi/gaelyk-functional-test/blob/master/test-project/src/functionalTest/groovy/groovyx/gaelyk/functional/geb/DataSetupCategorySpec.groovy"><code>DataSetupCategorySpec</code></a> for examples.</p>
+
+    <hr />
+    <div id="footer">
+      <span class="left">&#x25C0; <a href="modifies-datastore.html">Cleaning up datastore after tests execution with @ModifiesDatastore Spock extension</a></span>
+      <span class="center"><a href="index.html">Table of Contents</a></span>
+      <span class="right"><a href="login.html">Testing applications using the default GAE authentication mechanism with LoginCategory</a> &#x25B6;</span>
+    </div>
+  </div>
+  <p style="text-align: center">
+    Gaelyk Functional Test Tools Documentation - 0.1 - September, 2012<br />
+    Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a>
+  </p>
+</body>
+</html>
