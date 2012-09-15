@@ -4,7 +4,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <link href="css/stylesheet.css" rel="stylesheet" type="text/css">
-  <title>Gaelyk Functional Test Tools - Cleaning up datastore after tests execution with @ModifiesDatastore Spock extension - version 0.1</title>
+  <title>Gaelyk Functional Test Tools - Cleaning up datastore after tests execution - version 0.1</title>
 
   <link type="text/css" rel="stylesheet" href="css/shCore.css"></link>
   <link type="text/css" rel="stylesheet" href="css/shThemeEclipse.css"></link>
@@ -30,17 +30,17 @@
 <body>
   <div id="wrapper">
     <div id="header">
-      <span class="left">&#x25C0; <a href="remote.html">Using RemoteControl class to easily modify state of your remote application under test</a></span>
+      <span class="left">&#x25C0; <a href="remote.html">Modifying the state of the application under test</a></span>
       <span class="center"><a href="index.html">Table of Contents</a></span>
-      <span class="right"><a href="setup-data.html">Setting up datastore state using the DSL provided by DataSetupCategory</a> &#x25B6;</span>
+      <span class="right"><a href="setup-data.html">DSL for setting up datastore state</a> &#x25B6;</span>
     </div>
     <hr />
     <div class="page_toc">
       <h3>Chapter Contents</h3>
-      <ul><li><span class='toc_number'>3</span><a href='modifies-datastore.html#cleaning_up_datastore_after_tests_execution_with_modifiesdatastore_spock_extension'>Cleaning up datastore after tests execution with @ModifiesDatastore Spock extension</a><ul><li><span class='toc_number'>3.1</span><a href='modifies-datastore.html#examples'>Examples</a><ul><li><span class='toc_number'>3.1.1</span><a href='modifies-datastore.html#annotating_a_feature'>Annotating a feature</a></li><li><span class='toc_number'>3.1.2</span><a href='modifies-datastore.html#annotating_a_non_stepwise_specification'>Annotating a non-stepwise specification</a></li><li><span class='toc_number'>3.1.3</span><a href='modifies-datastore.html#annotating_a_stepwise_specification'>Annotating a stepwise specification</a></li></ul></li></ul></li></ul></li></ul>
+      <ul><li><span class='toc_number'>3</span><a href='modifies-datastore.html#cleaning_up_datastore_after_tests_execution'>Cleaning up datastore after tests execution</a><ul><li><span class='toc_number'>3.1</span><a href='modifies-datastore.html#examples'>Examples</a><ul><li><span class='toc_number'>3.1.1</span><a href='modifies-datastore.html#annotating_a_feature'>Annotating a feature</a></li><li><span class='toc_number'>3.1.2</span><a href='modifies-datastore.html#annotating_a_non_stepwise_specification'>Annotating a non-stepwise specification</a></li><li><span class='toc_number'>3.1.3</span><a href='modifies-datastore.html#annotating_a_stepwise_specification'>Annotating a stepwise specification</a></li></ul></li></ul></li></ul></li></ul>
     </div>
     <hr />
-    <h1><span id='cleaning_up_datastore_after_tests_execution_with_modifiesdatastore_spock_extension'>3</span> Cleaning up datastore after tests execution with @ModifiesDatastore Spock extension</h1>
+    <h1><span id='cleaning_up_datastore_after_tests_execution'>3</span> Cleaning up datastore after tests execution</h1>
 
 <p>If your tests need to setup some data before running or the actions performed in a test modify the datastore you obviously want to clear the changes after the test has run so that next test can start with a clean datastore. There is a <code>@ModifiesDatastore</code> <a href="http://spockframework.org">Spock</a> extension available as a part of the library that comes to your rescue in such situations.</p>
 
@@ -60,9 +60,9 @@
 
     <hr />
     <div id="footer">
-      <span class="left">&#x25C0; <a href="remote.html">Using RemoteControl class to easily modify state of your remote application under test</a></span>
+      <span class="left">&#x25C0; <a href="remote.html">Modifying the state of the application under test</a></span>
       <span class="center"><a href="index.html">Table of Contents</a></span>
-      <span class="right"><a href="setup-data.html">Setting up datastore state using the DSL provided by DataSetupCategory</a> &#x25B6;</span>
+      <span class="right"><a href="setup-data.html">DSL for setting up datastore state</a> &#x25B6;</span>
     </div>
   </div>
   <p style="text-align: center">

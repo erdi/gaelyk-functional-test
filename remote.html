@@ -4,7 +4,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <link href="css/stylesheet.css" rel="stylesheet" type="text/css">
-  <title>Gaelyk Functional Test Tools - Using RemoteControl class to easily modify state of your remote application under test - version 0.1</title>
+  <title>Gaelyk Functional Test Tools - Modifying the state of the application under test - version 0.1</title>
 
   <link type="text/css" rel="stylesheet" href="css/shCore.css"></link>
   <link type="text/css" rel="stylesheet" href="css/shThemeEclipse.css"></link>
@@ -32,17 +32,17 @@
     <div id="header">
       <span class="left">&#x25C0; <a href="intro.html">Introduction</a></span>
       <span class="center"><a href="index.html">Table of Contents</a></span>
-      <span class="right"><a href="modifies-datastore.html">Cleaning up datastore after tests execution with @ModifiesDatastore Spock extension</a> &#x25B6;</span>
+      <span class="right"><a href="modifies-datastore.html">Cleaning up datastore after tests execution</a> &#x25B6;</span>
     </div>
     <hr />
     <div class="page_toc">
       <h3>Chapter Contents</h3>
-      <ul><li><span class='toc_number'>2</span><a href='remote.html#using_remotecontrol_class_to_easily_modify_state_of_your_remote_application_under_test'>Using RemoteControl class to easily modify state of your remote application under test</a><ul><li><span class='toc_number'>2.1</span><a href='remote.html#example'>Example</a></li><li><span class='toc_number'>2.2</span><a href='remote.html#internal_usage'>Internal usage</a></li><li><span class='toc_number'>2.3</span><a href='remote.html#overriding_the_default_remote_control_url'>Overriding the default remote control url</a></li></ul></li></ul></li></ul>
+      <ul><li><span class='toc_number'>2</span><a href='remote.html#modifying_the_state_of_the_application_under_test'>Modifying the state of the application under test</a><ul><li><span class='toc_number'>2.1</span><a href='remote.html#example'>Example</a></li><li><span class='toc_number'>2.2</span><a href='remote.html#internal_usage'>Internal usage</a></li><li><span class='toc_number'>2.3</span><a href='remote.html#overriding_the_default_remote_control_url'>Overriding the default remote control url</a></li></ul></li></ul></li></ul>
     </div>
     <hr />
-    <h1><span id='using_remotecontrol_class_to_easily_modify_state_of_your_remote_application_under_test'>2</span> Using RemoteControl class to easily modify state of your remote application under test</h1>
+    <h1><span id='modifying_the_state_of_the_application_under_test'>2</span> Modifying the state of the application under test</h1>
 
-<p>The library contains a <code>groovyx.gaelyk.functional.remote.RemoteControl</code> class that makes it even simpler to modify the state of your remote server under test. The main aim of the class is to be able to communicate with the remote without the need of passing a remote control endpoint url when constructing the object. Please refer to the documentation of <a href="https://github.com/erdi/gaelyk-remote">gaelyk-remote</a> to learn about <a href="https://github.com/erdi/gaelyk-remote#gaelyk-specific-variables-in-remote-context">Gaelyk specific variables available in remote context</a>.</p>
+<p>The library contains a <code>groovyx.gaelyk.functional.remote.RemoteControl</code> class that extends from <code>groovyx.remote.client.RemoteControl</code>. The main aim of the class is to be able to communicate with the remote without the need of passing a remote control endpoint url when constructing the object. Please also refer to the documentation of <a href="https://github.com/erdi/gaelyk-remote">gaelyk-remote</a> to learn about <a href="https://github.com/erdi/gaelyk-remote#gaelyk-specific-variables-in-remote-context">Gaelyk specific variables available in remote context</a>.</p>
 
 <h2><span id='example'>2.1</span> Example</h2>
 
@@ -78,7 +78,7 @@ class RemoteControlSpec extends Specification {
     <div id="footer">
       <span class="left">&#x25C0; <a href="intro.html">Introduction</a></span>
       <span class="center"><a href="index.html">Table of Contents</a></span>
-      <span class="right"><a href="modifies-datastore.html">Cleaning up datastore after tests execution with @ModifiesDatastore Spock extension</a> &#x25B6;</span>
+      <span class="right"><a href="modifies-datastore.html">Cleaning up datastore after tests execution</a> &#x25B6;</span>
     </div>
   </div>
   <p style="text-align: center">

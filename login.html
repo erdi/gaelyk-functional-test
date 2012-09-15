@@ -4,7 +4,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <link href="css/stylesheet.css" rel="stylesheet" type="text/css">
-  <title>Gaelyk Functional Test Tools - Testing applications using the default GAE authentication mechanism with LoginCategory - version 0.1</title>
+  <title>Gaelyk Functional Test Tools - Testing applications that use the default GAE authentication mechanism - version 0.1</title>
 
   <link type="text/css" rel="stylesheet" href="css/shCore.css"></link>
   <link type="text/css" rel="stylesheet" href="css/shThemeEclipse.css"></link>
@@ -30,17 +30,17 @@
 <body>
   <div id="wrapper">
     <div id="header">
-      <span class="left">&#x25C0; <a href="setup-data.html">Setting up datastore state using the DSL provided by DataSetupCategory</a></span>
+      <span class="left">&#x25C0; <a href="setup-data.html">DSL for setting up datastore state</a></span>
       <span class="center"><a href="index.html">Table of Contents</a></span>
       
     </div>
     <hr />
     <div class="page_toc">
       <h3>Chapter Contents</h3>
-      <ul><li><span class='toc_number'>5</span><a href='login.html#testing_applications_using_the_default_gae_authentication_mechanism_with_logincategory'>Testing applications using the default GAE authentication mechanism with LoginCategory</a><ul><li><span class='toc_number'>5.1</span><a href='login.html#examples'>Examples</a></li></ul></li></ul>
+      <ul><li><span class='toc_number'>5</span><a href='login.html#testing_applications_that_use_the_default_gae_authentication_mechanism'>Testing applications that use the default GAE authentication mechanism</a><ul><li><span class='toc_number'>5.1</span><a href='login.html#examples'>Examples</a></li></ul></li></ul>
     </div>
     <hr />
-    <h1><span id='testing_applications_using_the_default_gae_authentication_mechanism_with_logincategory'>5</span> Testing applications using the default GAE authentication mechanism with LoginCategory</h1>
+    <h1><span id='testing_applications_that_use_the_default_gae_authentication_mechanism'>5</span> Testing applications that use the default GAE authentication mechanism</h1>
 
 <p>For applications using the <a href="https://developers.google.com/appengine/articles/auth">default GAE authentication mechanism</a> you might want to test if your application behaves as expected for logged in users and sometimes you might need to log in into the application to access certain parts of it, i.e. administration pages. This is where <code>LoginCategory</code> which provides <code>loginTo</code> method comes in handy.</p>
 
@@ -53,11 +53,17 @@ class NeedsToLoginSpec extends GebSpec {
 }
 </code></pre>
 
-<p>After that you can use the <code>loginTo</code> method just like <a href="http://www.gebish.org/manual/current/api/geb/Browser.html#to%28java.lang.Class,%20java.lang.Object%29"><code>to</code> method from Geb</a> with the exception that first too parameters are <code>username</code> of the logged in user and <code>isAdmin</code>, a switch to speify if the logged in user should have admin rights for the application.</p>
+<p>After that you can use the <code>loginTo</code> method just like <a href="http://www.gebish.org/manual/current/api/geb/Browser.html#to%28java.lang.Class,%20java.lang.Object%29"><code>to</code> method from Geb</a> with the exception that first too parameters are <code>username</code> of the logged in user and <code>isAdmin</code>, a switch to specify if the logged in user should have admin rights for the application.</p>
+
+<pre><code>loginTo('foo@example.com', false, MyPage) //login a non-admin user foo@example.com and go to MyPage
+loginTo('admin@example.com', true, MyPage) //login an admin user admin@example.com and go to MyPage
+loginTo('foo@example.com', false, MyPage, 'custom parameter') //login a non-admin user foo@example.com and go to MyPage passing 'custom parameter' to convertToPath() of the page
+loginTo('foo@example.com', false, MyPage, arg: 'value') //login a non-admin user foo@example.com and go to MyPage with 'arg' appended to the query string
+</code></pre>
 
     <hr />
     <div id="footer">
-      <span class="left">&#x25C0; <a href="setup-data.html">Setting up datastore state using the DSL provided by DataSetupCategory</a></span>
+      <span class="left">&#x25C0; <a href="setup-data.html">DSL for setting up datastore state</a></span>
       <span class="center"><a href="index.html">Table of Contents</a></span>
       
     </div>
