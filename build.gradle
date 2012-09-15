@@ -83,10 +83,6 @@ configure(subprojects.findAll {it.name.startsWith('test-project')}) {
 	gaelykPrecompileGroovlet.dependsOn createGroovletsDir
 }
 
-task wrapper(type: Wrapper) {
-	gradleVersion = '1.1'
-}
-
 idea.project {
 	ipr.withXml { provider ->
 		def node = provider.asNode()
