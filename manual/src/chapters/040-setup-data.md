@@ -1,6 +1,6 @@
-# Setting up datastore state using the DSL provided by DataSetupCategory
+# DSL for setting up datastore state
 
-The library provides a very simple DSL for setting up data in a datastore if your test need the datastore to be in a certain state to execute. The DSL is supposed to be a simplified version of [inline fixtures feature of Grails Fixtures plugin][grails-fixtures].
+The library provides a very simple DSL for setting up data in a datastore if your tests execution needs the datastore to be in a certain state. The DSL is supposed to be a simplified version of [inline fixtures feature of Grails Fixtures plugin][grails-fixtures].
 
 ## Examples
 

@@ -1,6 +1,6 @@
-# Using RemoteControl class to easily modify state of your remote application under test
+# Modifying the state of the application under test
 
-The library contains a `groovyx.gaelyk.functional.remote.RemoteControl` class that makes it even simpler to modify the state of your remote server under test. The main aim of the class is to be able to communicate with the remote without the need of passing a remote control endpoint url when constructing the object. Please refer to the documentation of [gaelyk-remote][gaelyk-remote] to learn about [Gaelyk specific variables available in remote context][remote-context].
+The library contains a `groovyx.gaelyk.functional.remote.RemoteControl` class that extends from `groovyx.remote.client.RemoteControl`. The main aim of the class is to be able to communicate with the remote without the need of passing a remote control endpoint url when constructing the object. Please also refer to the documentation of [gaelyk-remote][gaelyk-remote] to learn about [Gaelyk specific variables available in remote context][remote-context].
 
 ## Example
 
