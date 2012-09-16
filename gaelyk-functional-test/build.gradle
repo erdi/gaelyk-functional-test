@@ -8,3 +8,21 @@ dependencies {
 	compile "org.seleniumhq.selenium:selenium-api:$seleniumVersion"
 	testRuntime 'cglib:cglib-nodep:2.2.2'
 }
+
+modifyPom {
+	project {
+		name 'Gaelyk Functional Test Tools'
+		description 'A set of helpers to make functional testing of Gaelyk applications easier'
+	}
+}
+
+jar {
+	manifest {
+		attributes 'Implementation-Title': 'A set of helpers to make functional testing of Gaelyk applications easier',
+			'Implementation-Version': version,
+			'Built-By': System.getProperty('user.name'),
+			'Built-Date': new Date(),
+			'Built-JDK': System.getProperty('java.version'),
+			'Built-Gradle': gradle.gradleVersion
+	}
+}

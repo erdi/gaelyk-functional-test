@@ -1,3 +1,21 @@
 dependencies {
 	compile "com.google.appengine:appengine-api-1.0-sdk:$gaeVersion"
 }
+
+modifyPom {
+	project {
+		name 'Gaelyk Functional Test Datastore Builder'
+		description 'Provides runtime dependencies for Gaelyk Functional Test datastore builder DSL'
+	}
+}
+
+jar {
+	manifest {
+		attributes 'Implementation-Title': 'Provides runtime dependencies for Gaelyk Functional Test datastore builder DSL',
+			'Implementation-Version': version,
+			'Built-By': System.getProperty('user.name'),
+			'Built-Date': new Date(),
+			'Built-JDK': System.getProperty('java.version'),
+			'Built-Gradle': gradle.gradleVersion
+	}
+}
