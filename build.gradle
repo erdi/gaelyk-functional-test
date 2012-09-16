@@ -28,9 +28,9 @@ subprojects {
 		groovyVersion = '1.8.6'
 		gaeVersion = '1.7.0'
 		gaelykVersion = '1.2'
-		gebVersion = '0.7.0'
+		gebVersion = '0.7.2'
 		spockVersion = '0.6-groovy-1.8'
-		seleniumVersion = '2.22.0'
+		seleniumVersion = '2.25.0'
 		gaelykRemoteVersion = '0.1'
 
 		compatibilityVersion = 1.5
@@ -40,9 +40,6 @@ subprojects {
 
 	repositories {
 		mavenCentral()
-		maven {
-			url 'https://oss.sonatype.org/content/repositories/orggaelyk-272/'
-		}
 	}
 
 	dependencies {
