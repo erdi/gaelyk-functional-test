@@ -16,13 +16,14 @@
 
 package groovyx.gaelyk.functional.geb
 
-import spock.lang.Specification
 import groovyx.gaelyk.functional.remote.RemoteControl
 import groovyx.gaelyk.functional.spock.ModifiesDatastore
 import groovyx.remote.client.RemoteException
+import spock.lang.Specification
 import spock.lang.Unroll
+import spock.util.mop.Use
 
-@Mixin(DataSetupCategory)
+@Use(DataSetupCategory)
 @ModifiesDatastore
 class DataSetupCategorySpec extends Specification {
 	def remote = new RemoteControl()

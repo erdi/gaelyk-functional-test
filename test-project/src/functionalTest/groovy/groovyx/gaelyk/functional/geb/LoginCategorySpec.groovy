@@ -16,13 +16,14 @@
 
 package groovyx.gaelyk.functional.geb
 
-import geb.spock.GebSpec
-import groovyx.gaelyk.functional.geb.page.UserInfoPage
-import groovyx.gaelyk.functional.geb.page.AnotherUserInfoPage
-import spock.lang.Unroll
 import geb.Page
+import geb.spock.GebSpec
+import groovyx.gaelyk.functional.geb.page.AnotherUserInfoPage
+import groovyx.gaelyk.functional.geb.page.UserInfoPage
+import spock.lang.Unroll
+import spock.util.mop.Use
 
-@Mixin(LoginCategory)
+@Use(LoginCategory)
 class LoginCategorySpec extends GebSpec {
 
 	private void loggedInAt(Class<? extends Page> expectedPage) {

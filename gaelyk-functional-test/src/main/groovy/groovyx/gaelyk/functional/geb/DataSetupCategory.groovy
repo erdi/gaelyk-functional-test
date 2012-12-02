@@ -17,8 +17,9 @@
 package groovyx.gaelyk.functional.geb
 
 import groovyx.gaelyk.functional.gae.DataSetupProvider
+import spock.lang.Specification
 
-@Category(Object)
+@Category(Specification)
 class DataSetupCategory {
 	void setupData(Closure builder) {
 		new DataSetupProvider().setupData(builder)
