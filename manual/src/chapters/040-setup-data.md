@@ -4,4 +4,4 @@ The library provides a very simple DSL for setting up data in a datastore if you
 
 ## Examples
 
-To use the DSL you have to annotate your specification with `@Mixin(DataSetupCategory)` which provides the `setupData` method. Please refer to [`DataSetupCategorySpec`][data-setup-category-spec] for examples.
+To use the DSL you have to annotate your specification with `@Use(DataSetupCategory)` which provides the `setupData` method. Please refer to [`DataSetupCategorySpec`][data-setup-category-spec] for examples.

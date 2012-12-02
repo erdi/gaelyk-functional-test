@@ -4,9 +4,9 @@ For applications using the [default GAE authentication mechanism][gae-authentica
 
 ## Examples
 
-To use `loginTo` method you have to first annotate your specification with `@Mixin(LoginCategory)`
+To use `loginTo` method you have to first annotate your specification with `@Use(LoginCategory)`
 
-    @Mixin(LoginCategory)
+	@Use(LoginCategory)
 	class NeedsToLoginSpec extends GebSpec {
 	}
 
