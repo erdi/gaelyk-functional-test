@@ -4,7 +4,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <link href="css/stylesheet.css" rel="stylesheet" type="text/css">
-  <title>Gaelyk Functional Test Tools - Testing applications that use the default GAE authentication mechanism - version 0.1</title>
+  <title>Gaelyk Functional Test Tools - Testing applications that use the default GAE authentication mechanism - version 0.2</title>
 
   <link type="text/css" rel="stylesheet" href="css/shCore.css"></link>
   <link type="text/css" rel="stylesheet" href="css/shThemeEclipse.css"></link>
@@ -32,7 +32,7 @@
     <div id="header">
       <span class="left">&#x25C0; <a href="setup-data.html">DSL for setting up datastore state</a></span>
       <span class="center"><a href="index.html">Table of Contents</a></span>
-      
+      <span class="right"><a href="project.html">Changelog</a> &#x25B6;</span>
     </div>
     <hr />
     <div class="page_toc">
@@ -46,9 +46,9 @@
 
 <h2><span id='examples'>5.1</span> Examples</h2>
 
-<p>To use <code>loginTo</code> method you have to first annotate your specification with <code>@Mixin(LoginCategory)</code></p>
+<p>To use <code>loginTo</code> method you have to first annotate your specification with <code>@Use(LoginCategory)</code></p>
 
-<pre><code>@Mixin(LoginCategory)
+<pre><code>@Use(LoginCategory)
 class NeedsToLoginSpec extends GebSpec {
 }
 </code></pre>
@@ -65,11 +65,11 @@ loginTo('foo@example.com', false, MyPage, arg: 'value') //login a non-admin user
     <div id="footer">
       <span class="left">&#x25C0; <a href="setup-data.html">DSL for setting up datastore state</a></span>
       <span class="center"><a href="index.html">Table of Contents</a></span>
-      
+      <span class="right"><a href="project.html">Changelog</a> &#x25B6;</span>
     </div>
   </div>
   <p style="text-align: center">
-    Gaelyk Functional Test Tools Documentation - 0.1 - September, 2012<br />
+    Gaelyk Functional Test Tools Documentation - 0.2 - December, 2012<br />
     Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a>
   </p>
 </body>

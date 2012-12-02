@@ -32,8 +32,8 @@
   <h1 class="title">Gaelyk Functional Test Tools</h1>
   <p class="tag">— A set of helpers to make functional testing of Gaelyk applications easier —</p>
   <div class="toc">
-      <h2>Version 0.1</h2>
-    <ul><li><span class='toc_number'>1</span><a href='all.html#introduction'>Introduction</a><ul><li><span class='toc_number'>1.1</span><a href='all.html#project_setup'>Project setup</a><ul><li><span class='toc_number'>1.1.1</span><a href='all.html#dependency_on_gaelyk_functional_test'>Dependency on gaelyk-functional-test</a></li><li><span class='toc_number'>1.1.2</span><a href='all.html#setting_up_remote_control_endpoint'>Setting up remote control endpoint</a></li><li><span class='toc_number'>1.1.3</span><a href='all.html#dependency_on_gaelyk_functional_test_datastore_builder'>Dependency on gaelyk-functional-test-datastore-builder</a></li></ul><span class='toc_number'>1.2</span><a href='all.html#dependencies'>Dependencies</a></li></ul></li></ul></li></ul></li></ul><ul><li><span class='toc_number'>2</span><a href='all.html#modifying_the_state_of_the_application_under_test'>Modifying the state of the application under test</a><ul><li><span class='toc_number'>2.1</span><a href='all.html#example'>Example</a></li><li><span class='toc_number'>2.2</span><a href='all.html#internal_usage'>Internal usage</a></li><li><span class='toc_number'>2.3</span><a href='all.html#overriding_the_default_remote_control_url'>Overriding the default remote control url</a></li></ul></li></ul></li></ul><ul><li><span class='toc_number'>3</span><a href='all.html#cleaning_up_datastore_after_tests_execution'>Cleaning up datastore after tests execution</a><ul><li><span class='toc_number'>3.1</span><a href='all.html#examples'>Examples</a><ul><li><span class='toc_number'>3.1.1</span><a href='all.html#annotating_a_feature'>Annotating a feature</a></li><li><span class='toc_number'>3.1.2</span><a href='all.html#annotating_a_non_stepwise_specification'>Annotating a non-stepwise specification</a></li><li><span class='toc_number'>3.1.3</span><a href='all.html#annotating_a_stepwise_specification'>Annotating a stepwise specification</a></li></ul></li></ul></li></ul></li></ul><ul><li><span class='toc_number'>4</span><a href='all.html#dsl_for_setting_up_datastore_state'>DSL for setting up datastore state</a><ul><li><span class='toc_number'>4.1</span><a href='all.html#examples'>Examples</a></li></ul></li></ul><ul><li><span class='toc_number'>5</span><a href='all.html#testing_applications_that_use_the_default_gae_authentication_mechanism'>Testing applications that use the default GAE authentication mechanism</a><ul><li><span class='toc_number'>5.1</span><a href='all.html#examples'>Examples</a></li></ul></li></ul>
+      <h2>Version 0.2</h2>
+    <ul><li><span class='toc_number'>1</span><a href='all.html#introduction'>Introduction</a><ul><li><span class='toc_number'>1.1</span><a href='all.html#project_setup'>Project setup</a><ul><li><span class='toc_number'>1.1.1</span><a href='all.html#dependency_on_gaelyk_functional_test'>Dependency on gaelyk-functional-test</a></li><li><span class='toc_number'>1.1.2</span><a href='all.html#setting_up_remote_control_endpoint'>Setting up remote control endpoint</a></li><li><span class='toc_number'>1.1.3</span><a href='all.html#dependency_on_gaelyk_functional_test_datastore_builder'>Dependency on gaelyk-functional-test-datastore-builder</a></li></ul><span class='toc_number'>1.2</span><a href='all.html#dependencies'>Dependencies</a></li></ul></li></ul></li></ul></li></ul><ul><li><span class='toc_number'>2</span><a href='all.html#modifying_the_state_of_the_application_under_test'>Modifying the state of the application under test</a><ul><li><span class='toc_number'>2.1</span><a href='all.html#example'>Example</a></li><li><span class='toc_number'>2.2</span><a href='all.html#internal_usage'>Internal usage</a></li><li><span class='toc_number'>2.3</span><a href='all.html#overriding_the_default_remote_control_url'>Overriding the default remote control url</a></li></ul></li></ul></li></ul><ul><li><span class='toc_number'>3</span><a href='all.html#cleaning_up_datastore_after_tests_execution'>Cleaning up datastore after tests execution</a><ul><li><span class='toc_number'>3.1</span><a href='all.html#examples'>Examples</a><ul><li><span class='toc_number'>3.1.1</span><a href='all.html#annotating_a_feature'>Annotating a feature</a></li><li><span class='toc_number'>3.1.2</span><a href='all.html#annotating_a_non_stepwise_specification'>Annotating a non-stepwise specification</a></li><li><span class='toc_number'>3.1.3</span><a href='all.html#annotating_a_stepwise_specification'>Annotating a stepwise specification</a></li></ul></li></ul></li></ul></li></ul><ul><li><span class='toc_number'>4</span><a href='all.html#dsl_for_setting_up_datastore_state'>DSL for setting up datastore state</a><ul><li><span class='toc_number'>4.1</span><a href='all.html#examples'>Examples</a></li></ul></li></ul><ul><li><span class='toc_number'>5</span><a href='all.html#testing_applications_that_use_the_default_gae_authentication_mechanism'>Testing applications that use the default GAE authentication mechanism</a><ul><li><span class='toc_number'>5.1</span><a href='all.html#examples'>Examples</a></li></ul></li></ul><ul><li><span class='toc_number'>6</span><a href='all.html#changelog'>Changelog</a><ul><li><span class='toc_number'>6.1</span><a href='all.html#02'>0.2</a></li><li><span class='toc_number'>6.2</span><a href='all.html#01'>0.1</a></li></ul></li></ul></li></ul>
   </div>
   
     <div class="chapter">
@@ -61,7 +61,7 @@
 <p>The first step to use the library is to add a dependency on it to <code>functionalTestCompile</code> configuration:</p>
 
 <pre><code>dependencies {
-    functionalTestCompile 'org.gaelyk:gaelyk-functional-test:0.1'
+    functionalTestCompile 'org.gaelyk:gaelyk-functional-test:0.2'
 }
 </code></pre>
 
@@ -111,7 +111,7 @@ apply plugin: 'gae-geb'
 <p>If you wish to use the DSL for setting up data in the datastore you also have to add a runtime dependency on datastore builder:</p>
 
 <pre><code>dependencies {
-    runtime 'org.gaelyk:gaelyk-functional-test-datastore-builder:0.1'
+    runtime 'org.gaelyk:gaelyk-functional-test-datastore-builder:0.2'
 }
 </code></pre>
 
@@ -121,8 +121,8 @@ apply plugin: 'gae-geb'
 
 <ul>
 <li>org.gaelyk:gaelyk-remote:0.1</li>
-<li>org.spockframework:spock-core:0.6-groovy-1.8</li>
-<li>org.codehaus.geb:geb-spock:0.7.2</li>
+<li>org.spockframework:spock-core:0.7-groovy-1.8</li>
+<li>org.codehaus.geb:geb-spock:0.9.0-RC-1</li>
 </ul>
 
 <p>The library is simple enough to assume that newer versions of those dependencies should still work. Just simply specify them in your <code>build.gradle</code> and they will overwrite the ones specified in the library - by default <a href="http://gradle.org/docs/current/userguide/dependency_management.html#sub:version_conflicts">the newest version of the dependency is used by Gradle if there is a conflict</a>.</p>
@@ -194,7 +194,7 @@ class RemoteControlSpec extends Specification {
 
 <h2><span id='examples'>4.1</span> Examples</h2>
 
-<p>To use the DSL you have to annotate your specification with <code>@Mixin(DataSetupCategory)</code> which provides the <code>setupData</code> method. Please refer to <a href="https://github.com/erdi/gaelyk-functional-test/blob/master/test-project/src/functionalTest/groovy/groovyx/gaelyk/functional/geb/DataSetupCategorySpec.groovy"><code>DataSetupCategorySpec</code></a> for examples.</p>
+<p>To use the DSL you have to annotate your specification with <code>@Use(DataSetupCategory)</code> which provides the <code>setupData</code> method. Please refer to <a href="https://github.com/erdi/gaelyk-functional-test/blob/master/test-project/src/functionalTest/groovy/groovyx/gaelyk/functional/geb/DataSetupCategorySpec.groovy"><code>DataSetupCategorySpec</code></a> for examples.</p>
 
     </div>
   
@@ -205,9 +205,9 @@ class RemoteControlSpec extends Specification {
 
 <h2><span id='examples'>5.1</span> Examples</h2>
 
-<p>To use <code>loginTo</code> method you have to first annotate your specification with <code>@Mixin(LoginCategory)</code></p>
+<p>To use <code>loginTo</code> method you have to first annotate your specification with <code>@Use(LoginCategory)</code></p>
 
-<pre><code>@Mixin(LoginCategory)
+<pre><code>@Use(LoginCategory)
 class NeedsToLoginSpec extends GebSpec {
 }
 </code></pre>
@@ -222,9 +222,26 @@ loginTo('foo@example.com', false, MyPage, arg: 'value') //login a non-admin user
 
     </div>
   
+    <div class="chapter">
+      <h1><span id='changelog'>6</span> Changelog</h1>
+
+<h2><span id='02'>6.1</span> 0.2</h2>
+
+<ul>
+<li>Updated Geb dependency to 0.9.0-RC-1</li>
+<li>Updated Spock dependency to 0.7-groovy-1.8</li>
+<li>Small improvements to the manual</li>
+</ul>
+
+<h2><span id='01'>6.2</span> 0.1</h2>
+
+<p><strong>Initial Public Release</strong></p>
+
+    </div>
+  
   </div>
   <p style="text-align: center">
-    Gaelyk Functional Test Tools Documentation - 0.1 - September, 2012<br />
+    Gaelyk Functional Test Tools Documentation - 0.2 - December, 2012<br />
     Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a>
   </p>
 </body>
